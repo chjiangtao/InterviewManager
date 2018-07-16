@@ -5,5 +5,38 @@
     android:layout_height="match_parent">
 
 
+    <RelativeLayout
+        android:id="@+id/main_fragment_content_rl"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/main_fragment_tb"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#778899">
+        </android.support.v7.widget.Toolbar>
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/main_fragment_rv"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@id/main_fragment_tb">
 
+        </android.support.v7.widget.RecyclerView>
+        <android.support.design.widget.FloatingActionButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentRight="true"
+            android:layout_marginBottom="10dp"
+            android:layout_marginRight="10dp"
+            android:background=""/>
+    </RelativeLayout>
+    <RelativeLayout
+        android:id="@+id/main_fragment_left_menu_rl"
+        android:layout_width="240dp"
+        android:layout_height="match_parent"
+        android:layout_gravity="start"
+        android:background="#778899">
+
+    </RelativeLayout>
 </android.support.v4.widget.DrawerLayout>
