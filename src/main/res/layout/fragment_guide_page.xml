@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:cus="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".fragment.GuidePageFragment">
+
+    <android.support.v4.view.ViewPager
+        android:id="@+id/fragment_guide_page_vp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+
+    <com.example.interviewmanager.custom.Indicator
+        android:id="@+id/fragment_guide_page_indicator"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerInParent="true"
+        android:layout_marginBottom="60dp"
+        cus:pager_number="4"
+        cus:fillColor="@color/color_fill"
+        cus:strokeColor="@color/color_stroke"
+        cus:radius="30dp"
+        cus:circleInterval="40dp"/>
+    <TextView
+        android:id="@+id/start_main_fragment"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/start_main_fragment_tv"
+        android:textSize="26sp"
+        android:background="@drawable/start_fragment_selector"
+        android:layout_alignParentBottom="true"
+        android:padding="10dp"
+        android:layout_centerInParent="true"
+        android:layout_marginBottom="60dp"
+        android:clickable="true"
+        android:visibility="gone"/>
+</RelativeLayout>
