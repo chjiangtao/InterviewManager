@@ -11,6 +11,7 @@ import android.view.Window;
 import android.view.WindowManager;
 
 import com.example.interviewmanager.fragment.GuidePageFragment;
+import com.example.interviewmanager.fragment.LoginFragment;
 import com.example.interviewmanager.fragment.MainFragment;
 import com.example.interviewmanager.impl.OnButtonClickListener;
 
@@ -36,7 +37,7 @@ public class ProxyActivity extends FragmentActivity implements OnButtonClickList
     }
     private  void chooseFragment(){
 //        startFragment(new GuidePageFragment());
-        startFragment(new MainFragment());
+        startFragment(new LoginFragment());
 //        sp=getSharedPreferences("firstStart", Context.MODE_PRIVATE);
 //        SharedPreferences.Editor edit=sp.edit();
 //        isFrist=sp.getBoolean("isFirst",true);

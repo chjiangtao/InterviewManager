@@ -3,6 +3,7 @@ package com.example.interviewmanager.fragment;
 
 import android.animation.ObjectAnimator;
 import android.animation.PropertyValuesHolder;
+import android.app.Activity;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
@@ -33,6 +34,7 @@ import java.util.List;
  * A simple {@link Fragment} subclass.
  */
 public class MainFragment extends Fragment implements View.OnClickListener{
+
     private TextView showLeftMenu;
     private DrawerLayout dl;
     private RecyclerView recyclerView;
@@ -52,8 +54,13 @@ public class MainFragment extends Fragment implements View.OnClickListener{
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
+        setHasOptionsMenu(true);
         initData();
+    }
+
+    @Override
+    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
     }
 
     @Override
@@ -61,9 +68,8 @@ public class MainFragment extends Fragment implements View.OnClickListener{
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view=inflater.inflate(R.layout.fragment_main, container, false);
-        Toolbar toolbar=view.findViewById(R.id.main_fragment_tb);
-        ((AppCompatActivity)getActivity()).setSupportActionBar(toolbar);
-        setHasOptionsMenu(true);
+//        Toolbar toolbar=view.findViewById(R.id.main_fragment_tb);
+//        ((AppCompatActivity)getActivity()).setSupportActionBar(null);
         showLeftMenu=view.findViewById(R.id.main_fragment_show_left_menu_tv);
         showLeftMenu.setOnClickListener(this);
         dl=view.findViewById(R.id.drawer_layout);
@@ -85,6 +91,7 @@ public class MainFragment extends Fragment implements View.OnClickListener{
 
             }
         });
+
         adapter.setOnItemClickListener(new RecyclerViewAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(View view, int position) {
@@ -96,12 +103,29 @@ public class MainFragment extends Fragment implements View.OnClickListener{
 
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-
+        menu.clear();
+        inflater.inflate(R.menu.main_fragment_menu,menu);
+        menu.setGroupVisible(R.id.one,true);
         super.onCreateOptionsMenu(menu, inflater);
     }
-
+    private boolean isShowButton=false;
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
+
+        if(isShowButton){
+
+        }
+        switch (item.getItemId()){
+            case R.id.main_fragment_edit:
+
+                break;
+                case R.id.main_fragment_cancel:
+                break;
+                case R.id.main_fragment_all:
+                break;
+                case R.id.main_fragment_delete:
+                break;
+        }
         return super.onOptionsItemSelected(item);
     }
 

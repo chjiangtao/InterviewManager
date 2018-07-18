@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <group android:id="@+id/main_fragment_menu_set_group">
+        <item
+            android:id="@+id/main_fragment_menu_set"
+            android:icon="@drawable/main_fragment_menu_set"
+            android:title="设置" />
+    </group>
+    <group android:id="@+id/main_fragment_statistics_group">
+        <item
+            android:id="@+id/main_fragment_statistics"
+            android:icon="@drawable/main_fragment_menu_statistics"
+            android:title="统计" />
+    </group>
+</menu>
