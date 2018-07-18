@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+     <item
+         android:id="@+id/main_fragment_edit"
+         android:title="@string/main_fragment_edit"
+         app:showAsAction="always"/>
+    <item
+         android:id="@+id/main_fragment_cancel"
+         android:title="@string/main_fragment_cancel"
+        app:showAsAction="always"/>
+    <item
+         android:id="@+id/main_fragment_all"
+         android:title="@string/main_fragment_all"
+        app:showAsAction="always"/>
+    <item
+         android:id="@+id/main_fragment_delete"
+         android:title="@string/main_fragment_delete"
+        app:showAsAction="always"/>
+
+</menu>

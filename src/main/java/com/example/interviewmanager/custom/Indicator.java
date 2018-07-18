@@ -83,7 +83,6 @@ public class Indicator extends View {
 
     @Override
     protected void onDraw(Canvas canvas) {
-        Log.e("test","开始绘制");
         super.onDraw(canvas);
         for (int i=0;i<pageNumber;i++){
             canvas.drawCircle(getPaddingLeft()+radius+(radius*2+distance)*i,
@@ -95,7 +94,6 @@ public class Indicator extends View {
     }
     public void setCurrentIndex(int index){
         currentIndex=index;
-        Log.e("test","setCurrentIndex "+index);
         invalidate();
     }
 }
