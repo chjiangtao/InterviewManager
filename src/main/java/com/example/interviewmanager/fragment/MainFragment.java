@@ -136,11 +136,14 @@ public class MainFragment extends Fragment implements View.OnClickListener{
                 dl.openDrawer(Gravity.START);
                 break;
             case R.id.main_fragment_fab:
-                if(onButtonClickListener!=null){
-                    onButtonClickListener.onClick(floatingActionButton,new AddNewInterviewFragment());
-                }
+                Log.e("test","onButtonClickListener  "+String.valueOf(""+onButtonClickListener==null));
+//                onButtonClickListener.onButtonClick(floatingActionButton,new AddNewInterviewFragment());
+                onButtonClickListener.onButtonClick(null,null);
                 break;
         }
+    }
+    public void setButtonClickListener(OnButtonClickListener onButtonClickListener){
+        this.onButtonClickListener=onButtonClickListener;
     }
     private void initData(){
         for(int i=0;i<100;i++){
@@ -171,8 +174,6 @@ public class MainFragment extends Fragment implements View.OnClickListener{
     public OnButtonClickListener getOnButtonClickListener(){
         return onButtonClickListener;
     }
-    public void setButtonClickListener(OnButtonClickListener onButtonClickListener){
-        this.onButtonClickListener=onButtonClickListener;
-    }
+
 
 }

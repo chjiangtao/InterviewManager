@@ -12,4 +12,22 @@
             android:icon="@drawable/main_fragment_menu_statistics"
             android:title="统计" />
     </group>
+    <group android:id="@+id/main_fragment_about_group">
+        <item
+            android:id="@+id/main_fragment_about"
+            android:icon="@drawable/main_fragment_menu_statistics"
+            android:title="关于" />
+    </group>
+    <group android:id="@+id/main_fragment_contact_group">
+        <item
+            android:id="@+id/main_fragment_contact"
+            android:icon="@drawable/main_fragment_menu_contact"
+            android:title="联系开发者" />
+    </group>
+    <group android:id="@+id/main_fragment_exit_group">
+        <item
+            android:id="@+id/main_fragment_exit"
+            android:icon="@drawable/main_fragment_menu_exit"
+            android:title="退出" />
+    </group>
 </menu>

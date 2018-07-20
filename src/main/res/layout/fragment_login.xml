@@ -52,6 +52,12 @@
             android:layout_height="wrap_content"
             android:text="@string/login_fragment_login_btn"
             android:layout_marginTop="5dp"/>
-
+        <TextView
+            android:id="@+id/login_fragment_forget_password"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/login_fragment_forget_password"
+            android:textSize="16sp"
+            android:layout_marginTop="5dp"/>
     </LinearLayout>
 </RelativeLayout>

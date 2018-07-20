@@ -70,7 +70,6 @@ public class GuidePageFragment extends Fragment {
                     startFragment.setVisibility(View.GONE);
                 }
             }
-
             @Override
             public void onPageScrollStateChanged(int state) {
 
@@ -82,10 +81,7 @@ public class GuidePageFragment extends Fragment {
         startFragment.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
-               if(onButtonClickListener!=null){
-                     onButtonClickListener.onClick(startFragment,new MainFragment());
-                 }
+                onButtonClickListener.onButtonClick(startFragment,new MainFragment());
             }
         });
         return view;
@@ -102,7 +98,6 @@ public class GuidePageFragment extends Fragment {
         return onButtonClickListener;
     }
     public void setButtonClickListener(OnButtonClickListener onButtonClickListener){
-        Log.e("test","=====================");
         this.onButtonClickListener=onButtonClickListener;
     }
 }

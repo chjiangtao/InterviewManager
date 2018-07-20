@@ -28,5 +28,6 @@
     <string name="login_fragment_user_hint">请输入用户名</string>
     <string name="login_fragment_password_hint">请输入密码</string>
     <string name="login_fragment_login_btn">登录</string>
+    <string name="login_fragment_forget_password">忘记密码？</string>
 
 </resources>

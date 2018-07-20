@@ -6,6 +6,7 @@ import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
@@ -31,13 +32,13 @@ public class ProxyActivity extends FragmentActivity implements OnButtonClickList
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_proxy);
-        guidePageFragment.setButtonClickListener(ProxyActivity.this);
+//        guidePageFragment.setButtonClickListener(ProxyActivity.this);
         mainFragment.setButtonClickListener(ProxyActivity.this);
         chooseFragment();
     }
     private  void chooseFragment(){
 //        startFragment(new GuidePageFragment());
-        startFragment(new LoginFragment());
+        startFragment(new MainFragment());
 //        sp=getSharedPreferences("firstStart", Context.MODE_PRIVATE);
 //        SharedPreferences.Editor edit=sp.edit();
 //        isFrist=sp.getBoolean("isFirst",true);
@@ -56,7 +57,7 @@ public class ProxyActivity extends FragmentActivity implements OnButtonClickList
         transaction.commit();
     }
 
-    public void onClick(View view,Fragment fragment) {
+    public void onButtonClick(View view,Fragment fragment) {
         switch (view.getId()){
             case R.id.start_main_fragment:
                 startFragment(fragment);
@@ -66,9 +67,6 @@ public class ProxyActivity extends FragmentActivity implements OnButtonClickList
                 break;
         }
     }
-
-
-
 
     @Override
     public void onItemClick(Fragment fragment, int position) {
