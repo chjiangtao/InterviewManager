@@ -9,7 +9,7 @@ import com.example.interviewmanager.constant.Constant;
 public class MySQLiteOpenHelper extends SQLiteOpenHelper {
 
     public MySQLiteOpenHelper(Context context){
-        this(context, Constant.DB_NAME,null,Constant.DB_VERSION);
+        super(context, Constant.DB_NAME,null,Constant.DB_VERSION);
     }
 
     public MySQLiteOpenHelper(Context context, String name, SQLiteDatabase.CursorFactory factory, int version) {
@@ -18,15 +18,14 @@ public class MySQLiteOpenHelper extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase sqLiteDatabase) {
-//        String sql="create table if not exists "+Constant.DB_NAME+"(" +
-//                "_id integer primary key autoincrement," +
-//                "companyName text," +
-//                "address text," +
-//                "contact  text," +
-//                "office text," +
-//                "data text," +
-//                "salary text)";
-        String sql="create table "+Constant.TABLE_NAME;
+        String sql="create table if not exists "+Constant.TABLE_NAME+"(" +
+                "_id integer primary key autoincrement," +
+                "companyName text," +
+                "address text," +
+                "contact  text," +
+                "office text," +
+                "data text," +
+                "salary text)";
          sqLiteDatabase.execSQL(sql);
     }
 
