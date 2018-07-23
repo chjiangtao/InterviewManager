@@ -1,14 +1,119 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".fragment.NewInterviewTextFragment">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".fragment.NewInterviewTextFragment"
+    android:padding="15dp"
+    android:orientation="vertical">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <android.support.design.widget.TextInputLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
-
-</FrameLayout>
+        android:layout_height="wrap_content"
+        app:counterEnabled="false"
+        android:layout_marginTop="10dp">
+        <android.support.design.widget.TextInputEditText
+            android:id="@+id/new_interview_text_fragment_companyName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:inputType="text"
+            android:hint="请输入公司名称"/>
+    </android.support.design.widget.TextInputLayout>
+    <android.support.design.widget.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:counterEnabled="false"
+        android:layout_marginTop="15dp">
+        <android.support.design.widget.TextInputEditText
+            android:id="@+id/new_interview_text_fragment_address"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:inputType="text"
+            android:hint="请输入公司地址"/>
+    </android.support.design.widget.TextInputLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <android.support.design.widget.TextInputLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            app:counterEnabled="false"
+            android:layout_marginTop="10dp">
+            <android.support.design.widget.TextInputEditText
+                android:id="@+id/new_interview_text_fragment_contact"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:inputType="text"
+                android:hint="请输入联系人姓名"/>
+        </android.support.design.widget.TextInputLayout>
+        <android.support.design.widget.TextInputLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            app:counterEnabled="false"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="10dp">
+            <android.support.design.widget.TextInputEditText
+                android:id="@+id/new_interview_text_fragment_telephone"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:inputType="text"
+                android:hint="请输入联系方式"/>
+        </android.support.design.widget.TextInputLayout>
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <android.support.design.widget.TextInputLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            app:counterEnabled="false"
+            android:layout_marginTop="10dp">
+            <android.support.design.widget.TextInputEditText
+                android:id="@+id/new_interview_text_fragment_office"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:inputType="text"
+                android:hint="请输入面试职位"/>
+        </android.support.design.widget.TextInputLayout>
+        <android.support.design.widget.TextInputLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            app:counterEnabled="false"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="10dp">
+            <android.support.design.widget.TextInputEditText
+                android:id="@+id/new_interview_text_fragment_salary"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:inputType="text"
+                android:hint="薪资"/>
+        </android.support.design.widget.TextInputLayout>
+    </LinearLayout>
+    <android.support.design.widget.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:counterEnabled="false"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="10dp">
+        <android.support.design.widget.TextInputEditText
+            android:id="@+id/new_interview_text_fragment_data"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:inputType="text"
+            android:hint="请输入面试时间"/>
+    </android.support.design.widget.TextInputLayout>
+</LinearLayout>

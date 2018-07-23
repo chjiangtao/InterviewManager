@@ -1,6 +1,7 @@
 package com.example.interviewmanager.fragment;
 
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -37,9 +38,6 @@ public class GuidePageFragment extends Fragment {
     private List<View> views=new ArrayList<View>();
 
     private OnButtonClickListener onButtonClickListener;
-    public GuidePageFragment() {
-        // Required empty public constructor
-    }
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -94,10 +92,13 @@ public class GuidePageFragment extends Fragment {
         views.add(LayoutInflater.from(getActivity()).inflate(R.layout.vp_item_four,null));
     }
 
-    public OnButtonClickListener getOnButtonClick(){
-        return onButtonClickListener;
-    }
-    public void setButtonClickListener(OnButtonClickListener onButtonClickListener){
-        this.onButtonClickListener=onButtonClickListener;
+    @Override
+    public void onAttach(Context context) {
+        if(context instanceof OnButtonClickListener){
+            onButtonClickListener=(OnButtonClickListener)context;
+        }else{
+            throw new RuntimeException(context.toString()+" must implement OnButtonLinstener");
+        }
+        super.onAttach(context);
     }
 }

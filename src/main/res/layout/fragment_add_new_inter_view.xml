@@ -10,7 +10,11 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="#6495ED">
-
+        <TextView
+            android:id="@+id/add_new_inter_view_fragment_back"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/back"/>
     </android.support.v7.widget.Toolbar>
     <FrameLayout
         android:id="@+id/add_new_interview_fragment_container"

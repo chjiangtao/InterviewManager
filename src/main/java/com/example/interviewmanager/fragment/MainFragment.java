@@ -4,6 +4,7 @@ package com.example.interviewmanager.fragment;
 import android.animation.ObjectAnimator;
 import android.animation.PropertyValuesHolder;
 import android.app.Activity;
+import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
@@ -136,15 +137,11 @@ public class MainFragment extends Fragment implements View.OnClickListener{
                 dl.openDrawer(Gravity.START);
                 break;
             case R.id.main_fragment_fab:
-                Log.e("test","onButtonClickListener  "+String.valueOf(""+onButtonClickListener==null));
-//                onButtonClickListener.onButtonClick(floatingActionButton,new AddNewInterviewFragment());
-                onButtonClickListener.onButtonClick(null,null);
+                onButtonClickListener.onButtonClick(floatingActionButton,new AddNewInterviewFragment());
                 break;
         }
     }
-    public void setButtonClickListener(OnButtonClickListener onButtonClickListener){
-        this.onButtonClickListener=onButtonClickListener;
-    }
+
     private void initData(){
         for(int i=0;i<100;i++){
             datas.add("数据"+i);
@@ -171,9 +168,13 @@ public class MainFragment extends Fragment implements View.OnClickListener{
         ObjectAnimator.ofPropertyValuesHolder(view, pvhX, pvhY,pvhZ).setDuration(400).start();
     }
 
-    public OnButtonClickListener getOnButtonClickListener(){
-        return onButtonClickListener;
+    @Override
+    public void onAttach(Context context) {
+        if(context instanceof OnButtonClickListener){
+            onButtonClickListener=(OnButtonClickListener)context;
+        }else{
+            throw new RuntimeException(context.toString()+"must implement OnButtonLinstener");
+        }
+        super.onAttach(context);
     }
-
-
 }

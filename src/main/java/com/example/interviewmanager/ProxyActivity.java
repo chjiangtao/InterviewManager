@@ -15,6 +15,7 @@ import com.example.interviewmanager.fragment.GuidePageFragment;
 import com.example.interviewmanager.fragment.LoginFragment;
 import com.example.interviewmanager.fragment.MainFragment;
 import com.example.interviewmanager.impl.OnButtonClickListener;
+import com.example.interviewmanager.utils.DatabaseUtil;
 
 public class ProxyActivity extends FragmentActivity implements OnButtonClickListener{
 
@@ -22,8 +23,6 @@ public class ProxyActivity extends FragmentActivity implements OnButtonClickList
     private SharedPreferences sp;
     private FragmentManager manager;
     private FragmentTransaction transaction;
-    private GuidePageFragment guidePageFragment=new GuidePageFragment();
-    private MainFragment mainFragment=new MainFragment();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,13 +31,11 @@ public class ProxyActivity extends FragmentActivity implements OnButtonClickList
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_proxy);
-//        guidePageFragment.setButtonClickListener(ProxyActivity.this);
-        mainFragment.setButtonClickListener(ProxyActivity.this);
         chooseFragment();
     }
     private  void chooseFragment(){
 //        startFragment(new GuidePageFragment());
-        startFragment(new MainFragment());
+        startFragment(new GuidePageFragment());
 //        sp=getSharedPreferences("firstStart", Context.MODE_PRIVATE);
 //        SharedPreferences.Editor edit=sp.edit();
 //        isFrist=sp.getBoolean("isFirst",true);
@@ -61,6 +58,8 @@ public class ProxyActivity extends FragmentActivity implements OnButtonClickList
         switch (view.getId()){
             case R.id.start_main_fragment:
                 startFragment(fragment);
+                DatabaseUtil util=new DatabaseUtil(ProxyActivity.this);
+//                util.insert(null);
                 break;
             case R.id.main_fragment_fab:
                 startFragment(fragment);
