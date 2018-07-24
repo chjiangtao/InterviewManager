@@ -6,13 +6,10 @@ import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
-import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 
-import com.example.interviewmanager.fragment.GuidePageFragment;
-import com.example.interviewmanager.fragment.LoginFragment;
 import com.example.interviewmanager.fragment.MainFragment;
 import com.example.interviewmanager.impl.OnButtonClickListener;
 import com.example.interviewmanager.utils.DatabaseUtil;
@@ -35,7 +32,7 @@ public class ProxyActivity extends FragmentActivity implements OnButtonClickList
     }
     private  void chooseFragment(){
 //        startFragment(new GuidePageFragment());
-        startFragment(new GuidePageFragment());
+        startFragment(new MainFragment());
 //        sp=getSharedPreferences("firstStart", Context.MODE_PRIVATE);
 //        SharedPreferences.Editor edit=sp.edit();
 //        isFrist=sp.getBoolean("isFirst",true);

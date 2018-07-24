@@ -1,6 +1,7 @@
 package com.example.interviewmanager;
 
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
@@ -15,4 +16,6 @@ public class MainActivity extends AppCompatActivity {
         Stetho.initializeWithDefaults(this);
         startActivity(new Intent(MainActivity.this,ProxyActivity.class));
     }
+
+
 }

@@ -9,15 +9,15 @@ import java.util.List;
 public class Label {
     private int id;
     private String companyName;
-    private List<String> labels;
-    private List<Integer> weight;//每个标签的权重
+    private String label;
+    private int weight;//每个标签的权重
     public Label() {
     }
 
-    public Label(int id, String companyName, List<String> labels) {
+    public Label(int id, String companyName, String label) {
         this.id = id;
         this.companyName = companyName;
-        this.labels = labels;
+        this.label = label;
     }
 
     public int getId() {
@@ -36,12 +36,12 @@ public class Label {
         this.companyName = companyName;
     }
 
-    public List<String> getLabels() {
-        return labels;
+    public String getLabel() {
+        return label;
     }
 
-    public void setLabels(List<String> labels) {
-        this.labels = labels;
+    public void setLabel(String label) {
+        this.label = label;
     }
 
     @Override
@@ -49,7 +49,7 @@ public class Label {
         return "Label{" +
                 "id=" + id +
                 ", companyName='" + companyName + '\'' +
-                ", labels=" + labels +
+                ", label='" + label + '\'' +
                 '}';
     }
 }

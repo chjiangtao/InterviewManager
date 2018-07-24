@@ -18,7 +18,7 @@ public class MySQLiteOpenHelper extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase sqLiteDatabase) {
-        String sql="create table if not exists "+Constant.TABLE_NAME+"(" +
+        String sql="create table if not exists "+Constant.INTERVIEW_TABLE_NAME+"(" +
                 "_id integer primary key autoincrement," +
                 "companyName text," +
                 "address text," +
@@ -26,7 +26,13 @@ public class MySQLiteOpenHelper extends SQLiteOpenHelper {
                 "office text," +
                 "data text," +
                 "salary text)";
+        String sqlLabel="create table if not exists "+Constant.LABEL_TABLE_NAME+"(" +
+                "_id integer primary key autoincrement," +
+                "companyName text," +
+                "label text)";
          sqLiteDatabase.execSQL(sql);
+         sqLiteDatabase.execSQL(sqlLabel);
+
     }
 
     @Override

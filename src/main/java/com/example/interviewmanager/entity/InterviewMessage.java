@@ -1,5 +1,7 @@
 package com.example.interviewmanager.entity;
 
+import java.util.List;
+
 /**
  * 面试信息
  */
@@ -12,7 +14,6 @@ public class InterviewMessage {
     private String office;//职位
     private String data;//时间
     private String salary;//薪资
-
 
     public InterviewMessage() {
     }
