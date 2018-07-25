@@ -16,6 +16,4 @@ public class MainActivity extends AppCompatActivity {
         Stetho.initializeWithDefaults(this);
         startActivity(new Intent(MainActivity.this,ProxyActivity.class));
     }
-
-
 }
