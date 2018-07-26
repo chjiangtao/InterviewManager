@@ -24,7 +24,7 @@ public class MySQLiteOpenHelper extends SQLiteOpenHelper {
                 "address text," +
                 "contact  text," +
                 "office text," +
-                "data text," +
+                "date text," +
                 "salary text)";
         String sqlLabel="create table if not exists "+Constant.LABEL_TABLE_NAME+"(" +
                 "_id integer primary key autoincrement," +

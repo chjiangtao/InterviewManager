@@ -12,7 +12,7 @@ public class InterviewMessage {
     private String telephone;
     private String contact;//联系人
     private String office;//职位
-    private String data;//时间
+    private String date;//时间
     private String salary;//薪资
 
     public InterviewMessage() {
@@ -20,14 +20,14 @@ public class InterviewMessage {
 
     public InterviewMessage(int id, String companyName,
                             String address, String telephone,
-                            String contact, String office, String data, String salary) {
+                            String contact, String office, String date, String salary) {
         this.id = id;
         this.companyName = companyName;
         this.address = address;
         this.telephone = telephone;
         this.contact = contact;
         this.office = office;
-        this.data = data;
+        this.date = date;
         this.salary = salary;
     }
 
@@ -79,12 +79,12 @@ public class InterviewMessage {
         this.office = office;
     }
 
-    public String getData() {
-        return data;
+    public String getDate() {
+        return date;
     }
 
-    public void setData(String data) {
-        this.data = data;
+    public void setDate(String date) {
+        this.date = date;
     }
 
     public String getSalary() {
@@ -104,7 +104,7 @@ public class InterviewMessage {
                 ", telephone='" + telephone + '\'' +
                 ", contact='" + contact + '\'' +
                 ", office='" + office + '\'' +
-                ", data='" + data + '\'' +
+                ", data='" + date + '\'' +
                 ", salary='" + salary + '\'' +
                 '}';
     }

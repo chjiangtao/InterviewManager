@@ -40,7 +40,7 @@ public class DatabaseUtil {
         values.put("telephone", message.getTelephone());
         values.put("contact", message.getContact());
         values.put("office", message.getOffice());
-        values.put("data", message.getData());
+        values.put("date", message.getDate());
         values.put("salary", message.getSalary());
         long num = db.insert(Constant.INTERVIEW_TABLE_NAME, null, values);
         db.close();
@@ -65,7 +65,7 @@ public class DatabaseUtil {
             interviewMessage.setAddress(cursor.getString(cursor.getColumnIndex("address")));
             interviewMessage.setCompanyName(cursor.getString(cursor.getColumnIndex("companyName")));
             interviewMessage.setContact(cursor.getString(cursor.getColumnIndex("contact")));
-            interviewMessage.setData(cursor.getString(cursor.getColumnIndex("data")));
+            interviewMessage.setDate(cursor.getString(cursor.getColumnIndex("date")));
             interviewMessage.setId(cursor.getInt(cursor.getColumnIndex("_id")));
             interviewMessage.setOffice(cursor.getString(cursor.getColumnIndex("office")));
             interviewMessage.setSalary(cursor.getString(cursor.getColumnIndex("salary")));

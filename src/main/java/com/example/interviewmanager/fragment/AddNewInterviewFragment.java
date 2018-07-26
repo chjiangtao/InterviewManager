@@ -1,10 +1,12 @@
 package com.example.interviewmanager.fragment;
 
 
+
 import android.os.Bundle;
+
 import android.support.annotation.Nullable;
+import android.support.design.widget.TextInputEditText;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
@@ -14,6 +16,9 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.example.interviewmanager.R;
+
+import java.util.List;
+import java.util.Map;
 
 
 /**
@@ -28,8 +33,11 @@ public class AddNewInterviewFragment extends Fragment implements View.OnClickLis
     private TextView save;
     private boolean isShowImageFragment = false;
 
+    private TextInputEditText companyName;
     private NewInterviewImageFragment imageFragment = new NewInterviewImageFragment();
     private NewInterviewTextFragment textFragment = new NewInterviewTextFragment();
+
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -83,7 +91,7 @@ public class AddNewInterviewFragment extends Fragment implements View.OnClickLis
                 }
                 break;
             case R.id.add_new_interview_fragment_save:
-
+                getInputData();
                 break;
             case R.id.add_new_inter_view_fragment_back:
 
@@ -93,4 +101,17 @@ public class AddNewInterviewFragment extends Fragment implements View.OnClickLis
 
         }
     }
+
+    private void getInputData(){
+        Log.e("test","是否为空 "+ String.valueOf(""+transferData==null));
+        List<Map<String,String>> datas=transferData.getInputData();
+        Log.e("test","数据的长度 "+datas.size());
+    }
+
+    public void getTransferData(TransferData transferData){
+        this.transferData=transferData;
+    }
+    //Fragment间传递数据
+
+
 }

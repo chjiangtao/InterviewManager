@@ -1,9 +1,10 @@
 package com.example.interviewmanager;
 
+
 import android.content.SharedPreferences;
+import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
-import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.view.View;
@@ -13,7 +14,10 @@ import android.view.WindowManager;
 import com.example.interviewmanager.fragment.LoginFragment;
 import com.example.interviewmanager.fragment.MainFragment;
 import com.example.interviewmanager.impl.OnButtonClickListener;
+import com.example.interviewmanager.impl.TransferData;
 import com.example.interviewmanager.utils.DatabaseUtil;
+
+import org.greenrobot.eventbus.EventBus;
 
 public class ProxyActivity extends FragmentActivity implements OnButtonClickListener{
 
@@ -21,6 +25,7 @@ public class ProxyActivity extends FragmentActivity implements OnButtonClickList
     private SharedPreferences sp;
     private FragmentManager manager;
     private FragmentTransaction transaction;
+    private TransferData transferData;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,11 +34,12 @@ public class ProxyActivity extends FragmentActivity implements OnButtonClickList
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_proxy);
+//        EventBus.getDefault().register(this);
         chooseFragment();
     }
     private  void chooseFragment(){
 //        startFragment(new GuidePageFragment());
-        startFragment(new LoginFragment());
+        startFragment(new MainFragment());
 //        sp=getSharedPreferences("firstStart", Context.MODE_PRIVATE);
 //        SharedPreferences.Editor edit=sp.edit();
 //        isFrist=sp.getBoolean("isFirst",true);
@@ -68,5 +74,13 @@ public class ProxyActivity extends FragmentActivity implements OnButtonClickList
     @Override
     public void onItemClick(Fragment fragment, int position) {
 
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+//        if(EventBus.getDefault().isRegistered(this)){
+//            EventBus.getDefault().unregister(this);
+//        }
     }
 }
