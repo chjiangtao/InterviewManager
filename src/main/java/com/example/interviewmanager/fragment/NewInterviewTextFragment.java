@@ -3,33 +3,44 @@ package com.example.interviewmanager.fragment;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.design.widget.TextInputEditText;
 import android.support.v4.app.Fragment;
+import android.text.Editable;
+import android.text.TextWatcher;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.Toast;
 
 import com.example.interviewmanager.R;
-import com.example.interviewmanager.impl.TransferData;
+import com.example.interviewmanager.entity.InterviewMessage;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import org.greenrobot.eventbus.EventBus;
+
 
 /**
  * A simple {@link Fragment} subclass.
  */
-public class NewInterviewTextFragment extends Fragment implements TransferData{
+public class NewInterviewTextFragment extends Fragment {
 
-    private TextInputEditText companyName;
-    private TextInputEditText address;
-    private TextInputEditText contact;
-    private TextInputEditText telephone;
-    private TextInputEditText office;
-    private TextInputEditText salary;
-    private TextInputEditText data;
-    private AddNewInterviewFragment addNewInterviewFragment;
+    private EditText companyNameet;
+    private EditText addresset;
+    private EditText contactet;
+    private EditText telephoneet;
+    private EditText officeet;
+    private EditText salaryet;
+    private EditText dateet;
+    private Button test;
+    private  String companyName;
+//    private String address;
+//    private String contact;
+//    private String telephone;
+//    private String office;
+//    private String salary;
+//    private String date;
+    private InterviewMessage message=new InterviewMessage();
 
     public NewInterviewTextFragment() {
         // Required empty public constructor
@@ -37,10 +48,14 @@ public class NewInterviewTextFragment extends Fragment implements TransferData{
     }
 
     @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+    }
+
+    @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        addNewInterviewFragment=new AddNewInterviewFragment();
-//        addNewInterviewFragment.getTransferData(this);
+
     }
 
     @Override
@@ -48,30 +63,43 @@ public class NewInterviewTextFragment extends Fragment implements TransferData{
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view=inflater.inflate(R.layout.fragment_new_interview_text, container, false);
-        companyName=view.findViewById(R.id.new_interview_text_fragment_companyName);
-        address=view.findViewById(R.id.new_interview_text_fragment_address);
-        contact=view.findViewById(R.id.new_interview_text_fragment_contact);
-        telephone=view.findViewById(R.id.new_interview_text_fragment_telephone);
-        office=view.findViewById(R.id.new_interview_text_fragment_office);
-        salary=view.findViewById(R.id.new_interview_text_fragment_salary);
-        data=view.findViewById(R.id.new_interview_text_fragment_data);
+        companyNameet= view.findViewById(R.id.new_interview_text_fragment_companyName);
+        companyNameet.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+                 companyName=editable.toString();
+                 Log.e("test",""+companyName);
+            }
+        });
+        addresset=view.findViewById(R.id.new_interview_text_fragment_address);
+        contactet=view.findViewById(R.id.new_interview_text_fragment_contact);
+        telephoneet=view.findViewById(R.id.new_interview_text_fragment_telephone);
+        officeet=view.findViewById(R.id.new_interview_text_fragment_office);
+        salaryet=view.findViewById(R.id.new_interview_text_fragment_salary);
+        dateet=view.findViewById(R.id.new_interview_text_fragment_data);
+        test=view.findViewById(R.id.test);
+        test.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(getActivity(), ""+companyName, Toast.LENGTH_SHORT).show();
+            }
+        });
         return view;
     }
 
-    @Override
-    public List<Map<String,String>> getInputData() {
-        List<Map<String,String>> lists=new ArrayList<>();
-        Map<String,String> map=new HashMap<>();
-        map.put("companyName",companyName.getText().toString());
-        map.put("address",address.getText().toString());
-        map.put("contact",contact.getText().toString());
-        map.put("telephone",telephone.getText().toString());
-        map.put("office",office.getText().toString());
-        map.put("salary",salary.getText().toString());
-        map.put("data",data.getText().toString());
-        lists.add(map);
-        return lists;
+    public InterviewMessage getInputData() {
+        message.setCompanyName("hahahah");
+        return message;
     }
-    
 
 }

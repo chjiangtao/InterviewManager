@@ -130,7 +130,6 @@ public class MainFragment extends Fragment implements View.OnClickListener{
     }
 
     /**
-     * by moos on 2017.8.21
      * func:隐藏fab的动画
      */
 

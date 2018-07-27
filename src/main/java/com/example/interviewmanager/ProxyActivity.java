@@ -11,15 +11,20 @@ import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 
+import com.example.interviewmanager.entity.InterviewMessage;
 import com.example.interviewmanager.fragment.LoginFragment;
 import com.example.interviewmanager.fragment.MainFragment;
+import com.example.interviewmanager.fragment.NewInterviewTextFragment;
 import com.example.interviewmanager.impl.OnButtonClickListener;
 import com.example.interviewmanager.impl.TransferData;
 import com.example.interviewmanager.utils.DatabaseUtil;
 
 import org.greenrobot.eventbus.EventBus;
 
-public class ProxyActivity extends FragmentActivity implements OnButtonClickListener{
+import java.util.List;
+import java.util.Map;
+
+public class ProxyActivity extends FragmentActivity implements OnButtonClickListener,TransferData{
 
     private boolean isFrist=true;
     private SharedPreferences sp;
@@ -82,5 +87,11 @@ public class ProxyActivity extends FragmentActivity implements OnButtonClickList
 //        if(EventBus.getDefault().isRegistered(this)){
 //            EventBus.getDefault().unregister(this);
 //        }
+    }
+
+    @Override
+    public InterviewMessage getInputData() {
+        NewInterviewTextFragment newInterviewTextFragment=new NewInterviewTextFragment();
+        return newInterviewTextFragment.getInputData();
     }
 }

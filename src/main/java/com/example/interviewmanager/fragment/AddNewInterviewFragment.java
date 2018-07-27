@@ -2,6 +2,7 @@ package com.example.interviewmanager.fragment;
 
 
 
+import android.content.Context;
 import android.os.Bundle;
 
 import android.support.annotation.Nullable;
@@ -16,6 +17,9 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.example.interviewmanager.R;
+import com.example.interviewmanager.entity.InterviewMessage;
+import com.example.interviewmanager.impl.OnButtonClickListener;
+import com.example.interviewmanager.impl.TransferData;
 
 import java.util.List;
 import java.util.Map;
@@ -37,6 +41,7 @@ public class AddNewInterviewFragment extends Fragment implements View.OnClickLis
     private NewInterviewImageFragment imageFragment = new NewInterviewImageFragment();
     private NewInterviewTextFragment textFragment = new NewInterviewTextFragment();
 
+    private TransferData transferData;
 
 
     @Override
@@ -91,7 +96,8 @@ public class AddNewInterviewFragment extends Fragment implements View.OnClickLis
                 }
                 break;
             case R.id.add_new_interview_fragment_save:
-                getInputData();
+               InterviewMessage message= transferData.getInputData();
+               Log.e("test","message "+message.getCompanyName());
                 break;
             case R.id.add_new_inter_view_fragment_back:
 
@@ -102,16 +108,17 @@ public class AddNewInterviewFragment extends Fragment implements View.OnClickLis
         }
     }
 
-    private void getInputData(){
-        Log.e("test","是否为空 "+ String.valueOf(""+transferData==null));
-        List<Map<String,String>> datas=transferData.getInputData();
-        Log.e("test","数据的长度 "+datas.size());
-    }
 
-    public void getTransferData(TransferData transferData){
-        this.transferData=transferData;
+
+    @Override
+    public void onAttach(Context context) {
+        if(context instanceof OnButtonClickListener){
+            transferData=(TransferData)context;
+        }else{
+            throw new RuntimeException(context.toString()+"must implement TransferData");
+        }
+        super.onAttach(context);
     }
-    //Fragment间传递数据
 
 
 }
