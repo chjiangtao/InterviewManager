@@ -16,4 +16,5 @@ public class ChooseInterviewMessageImageView extends AppCompatImageView {
     public ChooseInterviewMessageImageView(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
     }
+
 }
