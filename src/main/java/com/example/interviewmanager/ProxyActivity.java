@@ -11,7 +11,9 @@ import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 
+import com.example.interviewmanager.entity.EventMessage;
 import com.example.interviewmanager.entity.InterviewMessage;
+import com.example.interviewmanager.fragment.AdFragment;
 import com.example.interviewmanager.fragment.LoginFragment;
 import com.example.interviewmanager.fragment.MainFragment;
 import com.example.interviewmanager.fragment.NewInterviewTextFragment;
@@ -20,6 +22,8 @@ import com.example.interviewmanager.impl.TransferData;
 import com.example.interviewmanager.utils.DatabaseUtil;
 
 import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 
 import java.util.List;
 import java.util.Map;
@@ -39,12 +43,19 @@ public class ProxyActivity extends FragmentActivity implements OnButtonClickList
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_proxy);
-//        EventBus.getDefault().register(this);
+        EventBus.getDefault().register(this);
         chooseFragment();
+    }
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        if(EventBus.getDefault().isRegistered(this)){
+            EventBus.getDefault().unregister(this);
+        }
     }
     private  void chooseFragment(){
 //        startFragment(new GuidePageFragment());
-        startFragment(new MainFragment());
+        startFragment(new AdFragment());
 //        sp=getSharedPreferences("firstStart", Context.MODE_PRIVATE);
 //        SharedPreferences.Editor edit=sp.edit();
 //        isFrist=sp.getBoolean("isFirst",true);
@@ -73,6 +84,7 @@ public class ProxyActivity extends FragmentActivity implements OnButtonClickList
             case R.id.main_fragment_fab:
                 startFragment(fragment);
                 break;
+
         }
     }
 
@@ -82,16 +94,21 @@ public class ProxyActivity extends FragmentActivity implements OnButtonClickList
     }
 
     @Override
-    protected void onDestroy() {
-        super.onDestroy();
-//        if(EventBus.getDefault().isRegistered(this)){
-//            EventBus.getDefault().unregister(this);
-//        }
+    public void onButtonClick(View view) {
+
     }
+
 
     @Override
     public InterviewMessage getInputData() {
         NewInterviewTextFragment newInterviewTextFragment=new NewInterviewTextFragment();
         return newInterviewTextFragment.getInputData();
     }
+
+   @Subscribe(threadMode = ThreadMode.MAIN)
+    public void messageEventBus(EventMessage message){
+//         if(){
+//
+//         }
+   }
 }

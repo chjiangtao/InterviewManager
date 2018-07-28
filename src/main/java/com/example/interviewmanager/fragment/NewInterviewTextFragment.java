@@ -32,7 +32,6 @@ public class NewInterviewTextFragment extends Fragment {
     private EditText officeet;
     private EditText salaryet;
     private EditText dateet;
-    private Button test;
     private  String companyName;
 //    private String address;
 //    private String contact;
@@ -87,13 +86,7 @@ public class NewInterviewTextFragment extends Fragment {
         officeet=view.findViewById(R.id.new_interview_text_fragment_office);
         salaryet=view.findViewById(R.id.new_interview_text_fragment_salary);
         dateet=view.findViewById(R.id.new_interview_text_fragment_data);
-        test=view.findViewById(R.id.test);
-        test.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Toast.makeText(getActivity(), ""+companyName, Toast.LENGTH_SHORT).show();
-            }
-        });
+
         return view;
     }
 

@@ -1,13 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".fragment.ShowInterviewFragment">
+    tools:context=".fragment.ShowInterviewFragment"
+    android:orientation="vertical">
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/show_interview_fragment_tb"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#4E95CD">
 
+    </android.support.v7.widget.Toolbar>
     <android.support.v4.view.ViewPager
         android:id="@+id/show_interview_fragment_vp"
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>
 
-</FrameLayout>
+</LinearLayout>

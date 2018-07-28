@@ -115,9 +115,21 @@
             android:inputType="text"
             android:hint="请输入面试时间"/>
     </android.support.design.widget.TextInputLayout>
-    <Button
-        android:id="@+id/test"
+    <android.support.design.widget.TextInputLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="测试"/>
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        app:counterEnabled="false"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="50dp"
+        >
+        <EditText
+            android:id="@+id/new_interview_image_fragment_remark"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:inputType="textMultiLine"
+            android:maxLines="5"
+            android:gravity="left|top"
+            android:hint="备注"/>
+    </android.support.design.widget.TextInputLayout>
 </LinearLayout>
