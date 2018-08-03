@@ -5,13 +5,9 @@
     android:layout_height="match_parent"
     tools:context=".fragment.ShowInterviewFragment"
     android:orientation="vertical">
-    <android.support.v7.widget.Toolbar
-        android:id="@+id/show_interview_fragment_tb"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="#4E95CD">
-
-    </android.support.v7.widget.Toolbar>
+    <include
+        android:id="@+id/tool_b"
+        layout="@layout/tool_bar"/>
     <android.support.v4.view.ViewPager
         android:id="@+id/show_interview_fragment_vp"
         android:layout_width="match_parent"

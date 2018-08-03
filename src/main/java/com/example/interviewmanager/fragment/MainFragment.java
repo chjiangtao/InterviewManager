@@ -38,7 +38,6 @@ import java.util.List;
  */
 public class MainFragment extends Fragment implements View.OnClickListener{
 
-    private TextView showLeftMenu;
     private DrawerLayout dl;
     private RecyclerView recyclerView;
     private List<String> datas=new ArrayList<>();
@@ -71,8 +70,7 @@ public class MainFragment extends Fragment implements View.OnClickListener{
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view=inflater.inflate(R.layout.fragment_main, container, false);
-        showLeftMenu=view.findViewById(R.id.main_fragment_show_left_menu_tv);
-        showLeftMenu.setOnClickListener(this);
+
         dl=view.findViewById(R.id.drawer_layout);
         floatingActionButton=view.findViewById(R.id.main_fragment_fab);
         floatingActionButton.setOnClickListener(this);
@@ -96,7 +94,7 @@ public class MainFragment extends Fragment implements View.OnClickListener{
         adapter.setOnItemClickListener(new RecyclerViewAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(View view, int position) {
-                onButtonClickListener.onItemClick(new ShowInterviewFragment(),position);
+
             }
         });
         return view;
@@ -105,11 +103,11 @@ public class MainFragment extends Fragment implements View.OnClickListener{
     @Override
     public void onClick(View view) {
         switch (view.getId()){
-            case R.id.main_fragment_show_left_menu_tv:
-                dl.openDrawer(Gravity.START);
-                break;
+//            case R.id.tool_bar:
+//                dl.openDrawer(Gravity.START);
+//                break;
             case R.id.main_fragment_fab:
-                onButtonClickListener.onButtonClick(floatingActionButton,new AddNewInterviewFragment());
+                onButtonClickListener.onButtonClick(floatingActionButton);
                 break;
             case R.id.main_fragment_head_image:
                 break;

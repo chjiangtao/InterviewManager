@@ -5,16 +5,10 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
-    <android.support.v7.widget.Toolbar
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="#778899">
-        <TextView
-            android:id="@+id/choose_head_image_fragment_back"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@drawable/back"/>
-    </android.support.v7.widget.Toolbar>
+    <include
+        android:id="@+id/tool_ba"
+        layout="@layout/tool_bar"/>
+
 
 
 </LinearLayout>

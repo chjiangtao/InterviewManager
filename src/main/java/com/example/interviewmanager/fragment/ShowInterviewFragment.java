@@ -14,11 +14,6 @@ import com.example.interviewmanager.R;
  */
 public class ShowInterviewFragment extends Fragment {
 
-
-    public ShowInterviewFragment() {
-        // Required empty public constructor
-    }
-
     public static ShowInterviewFragment newInstance(int position) {
         Bundle bundle = new Bundle();
         bundle.putInt("position",position);

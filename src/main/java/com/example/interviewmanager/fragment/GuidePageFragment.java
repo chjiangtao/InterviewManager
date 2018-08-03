@@ -79,7 +79,7 @@ public class GuidePageFragment extends Fragment {
         startFragment.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                onButtonClickListener.onButtonClick(startFragment,new MainFragment());
+                onButtonClickListener.onButtonClick(startFragment);
             }
         });
         return view;

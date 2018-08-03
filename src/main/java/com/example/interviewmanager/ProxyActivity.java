@@ -25,12 +25,10 @@ import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
-import java.util.List;
-import java.util.Map;
 
-public class ProxyActivity extends FragmentActivity implements OnButtonClickListener,TransferData{
+public class ProxyActivity extends FragmentActivity implements OnButtonClickListener, TransferData {
 
-    private boolean isFrist=true;
+    private boolean isFrist = true;
     private SharedPreferences sp;
     private FragmentManager manager;
     private FragmentTransaction transaction;
@@ -46,14 +44,16 @@ public class ProxyActivity extends FragmentActivity implements OnButtonClickList
         EventBus.getDefault().register(this);
         chooseFragment();
     }
+
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        if(EventBus.getDefault().isRegistered(this)){
+        if (EventBus.getDefault().isRegistered(this)) {
             EventBus.getDefault().unregister(this);
         }
     }
-    private  void chooseFragment(){
+
+    private void chooseFragment() {
 //        startFragment(new GuidePageFragment());
         startFragment(new AdFragment());
 //        sp=getSharedPreferences("firstStart", Context.MODE_PRIVATE);
@@ -67,48 +67,40 @@ public class ProxyActivity extends FragmentActivity implements OnButtonClickList
 //            startFragment(new AdFragment());
 //        }
     }
-    public void startFragment(Fragment fragment){
-        manager=getSupportFragmentManager();
-        transaction=manager.beginTransaction();
-        transaction.replace(R.id.fragment_container,fragment);
+
+    public void startFragment(Fragment fragment) {
+        manager = getSupportFragmentManager();
+        transaction = manager.beginTransaction();
+        transaction.replace(R.id.fragment_container, fragment);
         transaction.commit();
     }
 
-    public void onButtonClick(View view,Fragment fragment) {
-        switch (view.getId()){
+    public void onButtonClick(View view) {
+        switch (view.getId()) {
             case R.id.start_main_fragment:
-                startFragment(fragment);
-                DatabaseUtil util=new DatabaseUtil(ProxyActivity.this);
+                startFragment(new MainFragment());
+                DatabaseUtil util = new DatabaseUtil(ProxyActivity.this);
 //                util.insert(null);
                 break;
             case R.id.main_fragment_fab:
-                startFragment(fragment);
+                startFragment(new MainFragment());
                 break;
-
+            case R.id.ad_fragment_count_down_view:
+                startFragment(new MainFragment());
+                break;
         }
     }
 
     @Override
-    public void onItemClick(Fragment fragment, int position) {
-
-    }
-
-    @Override
-    public void onButtonClick(View view) {
-
-    }
-
-
-    @Override
     public InterviewMessage getInputData() {
-        NewInterviewTextFragment newInterviewTextFragment=new NewInterviewTextFragment();
+        NewInterviewTextFragment newInterviewTextFragment = new NewInterviewTextFragment();
         return newInterviewTextFragment.getInputData();
     }
 
-   @Subscribe(threadMode = ThreadMode.MAIN)
-    public void messageEventBus(EventMessage message){
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void messageEventBus(EventMessage message) {
 //         if(){
 //
 //         }
-   }
+    }
 }

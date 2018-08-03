@@ -1,6 +1,7 @@
 package com.example.interviewmanager.fragment;
 
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -19,10 +20,7 @@ import com.example.interviewmanager.impl.OnButtonClickListener;
 public class AdFragment extends Fragment {
 
     private ADCountDownView adCountDownView;
-    public AdFragment() {
-        // Required empty public constructor
-    }
-
+    private OnButtonClickListener onButtonClickListener;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -36,21 +34,22 @@ public class AdFragment extends Fragment {
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         adCountDownView=getActivity().findViewById(R.id.ad_fragment_count_down_view);
-        adCountDownView.setOnButtonClickListener(new OnButtonClickListener() {
+        adCountDownView.setOnViewClickListener(new ADCountDownView.OnViewClickListener() {
             @Override
-            public void onButtonClick(View view, Fragment fragment) {
+            public void onViewClick(View view) {
+//                 onButtonClickListener.onButtonClick(view);
 
-            }
-
-            @Override
-            public void onItemClick(Fragment fragment, int position) {
-
-            }
-
-            @Override
-            public void onButtonClick(View view) {
-                Log.e("test","======================");
             }
         });
+    }
+
+    @Override
+    public void onAttach(Context context) {
+        if(context instanceof OnButtonClickListener){
+            onButtonClickListener=(OnButtonClickListener)context;
+        }else{
+            throw new RuntimeException(context.toString()+" must implement OnButtonLinstener");
+        }
+        super.onAttach(context);
     }
 }

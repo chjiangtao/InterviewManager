@@ -8,20 +8,20 @@ import android.graphics.Rect;
 import android.support.annotation.Nullable;
 import android.util.AttributeSet;
 import android.util.Log;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.animation.LinearInterpolator;
 
-import com.example.interviewmanager.fragment.MainFragment;
 import com.example.interviewmanager.impl.OnButtonClickListener;
 
 /**
  * 广告页的倒计时
  */
-public class ADCountDownView extends View implements View.OnClickListener{
+public class ADCountDownView extends View{
     private String prompt="关闭|";
     private int minNumber=0;
     private Paint mPaint;
-    private OnButtonClickListener onButtonClickListener;
+    private OnViewClickListener onViewClickListener;
 
     public ADCountDownView(Context context) {
         this(context,null);
@@ -55,7 +55,7 @@ public class ADCountDownView extends View implements View.OnClickListener{
         if(mode==MeasureSpec.EXACTLY){//match_parent或者具体值
             height=size;
         }else if(mode==MeasureSpec.AT_MOST){
-            height=textHeight;
+            height=textHeight+getPaddingBottom()+getPaddingTop();
         }
         return height;
 
@@ -68,7 +68,7 @@ public class ADCountDownView extends View implements View.OnClickListener{
         if(mode==MeasureSpec.EXACTLY){//match_parent或者具体值
             width=size;
         }else if(mode==MeasureSpec.AT_MOST){
-            width=textWidth;
+            width=textWidth+getPaddingLeft()+getPaddingRight();
         }
         return width;
     }
@@ -103,11 +103,22 @@ public class ADCountDownView extends View implements View.OnClickListener{
                 prompt="关闭|"+value+"s";
                 postInvalidate();
                 if(minNumber==value){
-
+                    Log.e("test","minNumber "+minNumber+" value "+value);
+                    onViewClickListener.onViewClick(ADCountDownView.this);
                 }
             }
         });
         animator.start();
+    }
+
+    @Override
+    public boolean onTouchEvent(MotionEvent event) {
+        switch (event.getAction()){
+            case MotionEvent.ACTION_DOWN:
+                onViewClickListener.onViewClick(this);
+                break;
+        }
+        return true;
     }
 
     @Override
@@ -116,13 +127,14 @@ public class ADCountDownView extends View implements View.OnClickListener{
         startCountDown();
     }
 
-    @Override
-    public void onClick(View view) {
-        Log.e("test","hahahahahha");
-        onButtonClickListener.onButtonClick(view);
+    public void setOnViewClickListener(OnViewClickListener onViewClickListener){
+        this.onViewClickListener=onViewClickListener;
     }
 
-    public void setOnButtonClickListener(OnButtonClickListener onButtonClickListener){
-        this.onButtonClickListener=onButtonClickListener;
+
+
+    public interface OnViewClickListener{
+        void onViewClick(View view);
     }
+
 }
