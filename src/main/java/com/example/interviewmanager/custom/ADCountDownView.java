@@ -12,7 +12,7 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.animation.LinearInterpolator;
 
-import com.example.interviewmanager.impl.OnButtonClickListener;
+import com.example.interviewmanager.impl.OnViewClickListener;
 
 /**
  * 广告页的倒计时
@@ -129,12 +129,6 @@ public class ADCountDownView extends View{
 
     public void setOnViewClickListener(OnViewClickListener onViewClickListener){
         this.onViewClickListener=onViewClickListener;
-    }
-
-
-
-    public interface OnViewClickListener{
-        void onViewClick(View view);
     }
 
 }

@@ -2,6 +2,7 @@ package com.example.interviewmanager.fragment;
 
 
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,12 +15,20 @@ import com.example.interviewmanager.R;
  */
 public class ShowInterviewFragment extends Fragment {
 
+    private int position;
     public static ShowInterviewFragment newInstance(int position) {
         Bundle bundle = new Bundle();
         bundle.putInt("position",position);
         ShowInterviewFragment fragment = new ShowInterviewFragment();
         fragment.setArguments(bundle);
         return fragment;
+    }
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        Bundle bundle=getArguments();
+        position=bundle.getInt("position",0);
     }
 
     @Override

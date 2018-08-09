@@ -6,20 +6,15 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import com.example.interviewmanager.MainActivity;
-import com.example.interviewmanager.ProxyActivity;
 import com.example.interviewmanager.R;
 import com.example.interviewmanager.adapter.ViewPagerAdapter;
 import com.example.interviewmanager.custom.Indicator;
-import com.example.interviewmanager.impl.OnButtonClickListener;
+import com.example.interviewmanager.impl.OnViewClickListener;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -37,7 +32,7 @@ public class GuidePageFragment extends Fragment {
 
     private List<View> views=new ArrayList<View>();
 
-    private OnButtonClickListener onButtonClickListener;
+    private OnViewClickListener onViewClickListener;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -79,7 +74,7 @@ public class GuidePageFragment extends Fragment {
         startFragment.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                onButtonClickListener.onButtonClick(startFragment);
+                onViewClickListener.onViewClick(startFragment);
             }
         });
         return view;
@@ -94,8 +89,8 @@ public class GuidePageFragment extends Fragment {
 
     @Override
     public void onAttach(Context context) {
-        if(context instanceof OnButtonClickListener){
-            onButtonClickListener=(OnButtonClickListener)context;
+        if(context instanceof OnViewClickListener){
+            onViewClickListener=(OnViewClickListener)context;
         }else{
             throw new RuntimeException(context.toString()+" must implement OnButtonLinstener");
         }

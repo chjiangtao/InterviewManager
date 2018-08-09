@@ -14,10 +14,12 @@ import android.view.WindowManager;
 import com.example.interviewmanager.entity.EventMessage;
 import com.example.interviewmanager.entity.InterviewMessage;
 import com.example.interviewmanager.fragment.AdFragment;
+import com.example.interviewmanager.fragment.AddNewInterviewFragment;
+import com.example.interviewmanager.fragment.GuidePageFragment;
 import com.example.interviewmanager.fragment.LoginFragment;
 import com.example.interviewmanager.fragment.MainFragment;
 import com.example.interviewmanager.fragment.NewInterviewTextFragment;
-import com.example.interviewmanager.impl.OnButtonClickListener;
+import com.example.interviewmanager.impl.OnViewClickListener;
 import com.example.interviewmanager.impl.TransferData;
 import com.example.interviewmanager.utils.DatabaseUtil;
 
@@ -26,7 +28,8 @@ import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
 
-public class ProxyActivity extends FragmentActivity implements OnButtonClickListener, TransferData {
+
+public class ProxyActivity extends FragmentActivity implements  TransferData,OnViewClickListener {
 
     private boolean isFrist = true;
     private SharedPreferences sp;
@@ -55,7 +58,7 @@ public class ProxyActivity extends FragmentActivity implements OnButtonClickList
 
     private void chooseFragment() {
 //        startFragment(new GuidePageFragment());
-        startFragment(new AdFragment());
+        startFragment(new GuidePageFragment());
 //        sp=getSharedPreferences("firstStart", Context.MODE_PRIVATE);
 //        SharedPreferences.Editor edit=sp.edit();
 //        isFrist=sp.getBoolean("isFirst",true);
@@ -75,22 +78,6 @@ public class ProxyActivity extends FragmentActivity implements OnButtonClickList
         transaction.commit();
     }
 
-    public void onButtonClick(View view) {
-        switch (view.getId()) {
-            case R.id.start_main_fragment:
-                startFragment(new MainFragment());
-                DatabaseUtil util = new DatabaseUtil(ProxyActivity.this);
-//                util.insert(null);
-                break;
-            case R.id.main_fragment_fab:
-                startFragment(new MainFragment());
-                break;
-            case R.id.ad_fragment_count_down_view:
-                startFragment(new MainFragment());
-                break;
-        }
-    }
-
     @Override
     public InterviewMessage getInputData() {
         NewInterviewTextFragment newInterviewTextFragment = new NewInterviewTextFragment();
@@ -102,5 +89,23 @@ public class ProxyActivity extends FragmentActivity implements OnButtonClickList
 //         if(){
 //
 //         }
+    }
+
+    @Override
+    public void onViewClick(View view) {
+        switch (view.getId()){
+            case R.id.start_main_fragment:
+                startFragment(new MainFragment());
+                DatabaseUtil util = new DatabaseUtil(ProxyActivity.this);
+//                util.insert(null);
+                break;
+            case R.id.main_fragment_fab:
+                startFragment(new AddNewInterviewFragment());
+                break;
+            case R.id.add_new_inter_view_fragment_back:
+            case R.id.ad_fragment_count_down_view:
+                startFragment(new MainFragment());
+                break;
+        }
     }
 }

@@ -18,11 +18,8 @@ import android.widget.TextView;
 
 import com.example.interviewmanager.R;
 import com.example.interviewmanager.entity.InterviewMessage;
-import com.example.interviewmanager.impl.OnButtonClickListener;
+import com.example.interviewmanager.impl.OnViewClickListener;
 import com.example.interviewmanager.impl.TransferData;
-
-import java.util.List;
-import java.util.Map;
 
 
 /**
@@ -36,13 +33,14 @@ public class AddNewInterviewFragment extends Fragment implements View.OnClickLis
     private TextView submit;
     private TextView save;
     private boolean isShowImageFragment = false;
+    private TextView back;
 
     private TextInputEditText companyName;
     private NewInterviewImageFragment imageFragment = new NewInterviewImageFragment();
     private NewInterviewTextFragment textFragment = new NewInterviewTextFragment();
 
     private TransferData transferData;
-
+    private OnViewClickListener onViewClickListener;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -69,6 +67,9 @@ public class AddNewInterviewFragment extends Fragment implements View.OnClickLis
         submit.setOnClickListener(this);
         save = getActivity().findViewById(R.id.add_new_interview_fragment_save);
         save.setOnClickListener(this);
+        back=getActivity().findViewById(R.id.add_new_inter_view_fragment_back);
+        back.setOnClickListener(this);
+
     }
 
     public void startFragment(Fragment fragment) {
@@ -100,7 +101,7 @@ public class AddNewInterviewFragment extends Fragment implements View.OnClickLis
                Log.e("test","message "+message.getCompanyName());
                 break;
             case R.id.add_new_inter_view_fragment_back:
-
+                onViewClickListener.onViewClick(view);
                 break;
             case R.id.add_new_interview_fragment_submit:
                 break;
@@ -112,10 +113,15 @@ public class AddNewInterviewFragment extends Fragment implements View.OnClickLis
 
     @Override
     public void onAttach(Context context) {
-        if(context instanceof OnButtonClickListener){
+        if(context instanceof TransferData){
             transferData=(TransferData)context;
         }else{
             throw new RuntimeException(context.toString()+"must implement TransferData");
+        }
+        if(context instanceof OnViewClickListener){
+            onViewClickListener=(OnViewClickListener)context;
+        }else{
+            throw new RuntimeException(context.toString()+"must implement OnViewClickListener");
         }
         super.onAttach(context);
     }

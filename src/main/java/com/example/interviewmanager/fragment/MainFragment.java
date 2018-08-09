@@ -3,32 +3,22 @@ package com.example.interviewmanager.fragment;
 
 import android.animation.ObjectAnimator;
 import android.animation.PropertyValuesHolder;
-import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.DrawerLayout;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.Toolbar;
 import android.util.Log;
-import android.view.Gravity;
 import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
-import android.widget.TextView;
 
 import com.example.interviewmanager.R;
 import com.example.interviewmanager.adapter.RecyclerViewAdapter;
-import com.example.interviewmanager.impl.OnButtonClickListener;
+import com.example.interviewmanager.impl.OnViewClickListener;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -42,9 +32,8 @@ public class MainFragment extends Fragment implements View.OnClickListener{
     private RecyclerView recyclerView;
     private List<String> datas=new ArrayList<>();
     private FloatingActionButton floatingActionButton;
-    private OnButtonClickListener onButtonClickListener;
+    private OnViewClickListener onViewClickListener;
     private RecyclerViewAdapter adapter;
-
 
 
     public static MainFragment newInstance() {
@@ -78,23 +67,24 @@ public class MainFragment extends Fragment implements View.OnClickListener{
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity(),LinearLayoutManager.VERTICAL, false));
         adapter=new RecyclerViewAdapter(datas);
         recyclerView.setAdapter(adapter);
+
         recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
             public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
                 super.onScrollStateChanged(recyclerView, newState);
+
             }
 
             @Override
             public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
                 super.onScrolled(recyclerView, dx, dy);
-
             }
         });
 
         adapter.setOnItemClickListener(new RecyclerViewAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(View view, int position) {
-
+                 Log.e("test","点击了"+position);
             }
         });
         return view;
@@ -107,7 +97,7 @@ public class MainFragment extends Fragment implements View.OnClickListener{
 //                dl.openDrawer(Gravity.START);
 //                break;
             case R.id.main_fragment_fab:
-                onButtonClickListener.onButtonClick(floatingActionButton);
+                onViewClickListener.onViewClick(floatingActionButton);
                 break;
             case R.id.main_fragment_head_image:
                 break;
@@ -119,6 +109,7 @@ public class MainFragment extends Fragment implements View.OnClickListener{
             datas.add("数据"+i);
         }
     }
+
     public void showFABAnimation(View view)
     {
         PropertyValuesHolder pvhX = PropertyValuesHolder.ofFloat("alpha", 1f);
@@ -141,8 +132,8 @@ public class MainFragment extends Fragment implements View.OnClickListener{
 
     @Override
     public void onAttach(Context context) {
-        if(context instanceof OnButtonClickListener){
-            onButtonClickListener=(OnButtonClickListener)context;
+        if(context instanceof OnViewClickListener){
+            onViewClickListener=(OnViewClickListener)context;
         }else{
             throw new RuntimeException(context.toString()+"must implement OnButtonLinstener");
         }

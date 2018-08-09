@@ -22,8 +22,8 @@
         cus:pager_number="4"
         cus:fillColor="@color/color_fill"
         cus:strokeColor="@color/color_stroke"
-        cus:radius="30dp"
-        cus:circleInterval="40dp"/>
+        cus:radius="5dp"
+        cus:circleInterval="20dp"/>
     <TextView
         android:id="@+id/start_main_fragment"
         android:layout_width="wrap_content"

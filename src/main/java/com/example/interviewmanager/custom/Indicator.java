@@ -7,12 +7,14 @@ import android.graphics.Color;
 import android.graphics.Paint;
 import android.support.annotation.Nullable;
 import android.util.AttributeSet;
+import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.View;
 
 import com.example.interviewmanager.R;
 
 public class Indicator extends View {
+    private Context mContext;
     private int fillColor,strokeColor;
     private int pageNumber;
     private int currentIndex;//当前圆点下标
@@ -20,6 +22,9 @@ public class Indicator extends View {
     private int distance;//两个圆间的距离
     private Paint mStrokePaint;
     private Paint mFillPaint;
+    private int screenWidth;
+    private double proportion=0.01;//圆直径相对于屏幕宽度的比例
+
     public Indicator(Context context) {
         this(context,null);
     }
@@ -30,6 +35,7 @@ public class Indicator extends View {
 
     public Indicator(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
+        mContext=context;
         TypedArray a=context.obtainStyledAttributes(attrs, R.styleable.Indicator);
         fillColor=a.getColor(R.styleable.Indicator_fillColor, Color.parseColor("#F96A0E"));
         strokeColor=a.getColor(R.styleable.Indicator_strokeColor,Color.parseColor("#cecece"));
@@ -95,5 +101,11 @@ public class Indicator extends View {
     public void setCurrentIndex(int index){
         currentIndex=index;
         invalidate();
+    }
+
+    //获取屏幕的宽度
+    private void getScreenWidth(){
+        DisplayMetrics dm=getResources().getDisplayMetrics();
+        screenWidth=dm.widthPixels;
     }
 }

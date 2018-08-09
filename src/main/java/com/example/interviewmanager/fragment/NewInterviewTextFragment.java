@@ -86,7 +86,6 @@ public class NewInterviewTextFragment extends Fragment {
         officeet=view.findViewById(R.id.new_interview_text_fragment_office);
         salaryet=view.findViewById(R.id.new_interview_text_fragment_salary);
         dateet=view.findViewById(R.id.new_interview_text_fragment_data);
-
         return view;
     }
 
