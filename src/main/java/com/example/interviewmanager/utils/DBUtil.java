@@ -17,10 +17,10 @@ import java.util.List;
 /**
  * 数据库相关
  */
-public class DatabaseUtil {
+public class DBUtil {
     private SQLiteDatabase db;
 
-    public DatabaseUtil(Context context) {
+    public DBUtil(Context context) {
         MySQLiteOpenHelper helper = new MySQLiteOpenHelper(context);
         if (db == null) {
             db = helper.getWritableDatabase();
@@ -42,6 +42,7 @@ public class DatabaseUtil {
         values.put("office", message.getOffice());
         values.put("date", message.getDate());
         values.put("salary", message.getSalary());
+        values.put("remark",message.getRemark());
         long num = db.insert(Constant.INTERVIEW_TABLE_NAME, null, values);
         db.close();
         if (num != -1) {
@@ -55,12 +56,11 @@ public class DatabaseUtil {
      *
      * @return
      */
-    public List<InterviewMessageWithLabel> getAllInterviewMessages() {
-        List<InterviewMessageWithLabel> messageList = new ArrayList<>();
+    public List<InterviewMessage> getAllInterviewMessages() {
+        List<InterviewMessage> messageList = new ArrayList<>();
         Cursor cursor = db.query(Constant.INTERVIEW_TABLE_NAME, null, null, null, null, null, null);
         cursor.moveToFirst();
         while (cursor.moveToNext()) {
-            InterviewMessageWithLabel interviewMessageWithLabel = new InterviewMessageWithLabel();
             InterviewMessage interviewMessage = new InterviewMessage();
             interviewMessage.setAddress(cursor.getString(cursor.getColumnIndex("address")));
             interviewMessage.setCompanyName(cursor.getString(cursor.getColumnIndex("companyName")));
@@ -69,10 +69,7 @@ public class DatabaseUtil {
             interviewMessage.setId(cursor.getInt(cursor.getColumnIndex("_id")));
             interviewMessage.setOffice(cursor.getString(cursor.getColumnIndex("office")));
             interviewMessage.setSalary(cursor.getString(cursor.getColumnIndex("salary")));
-            List<Label> labels=getAllLabels(interviewMessage.getCompanyName());
-            interviewMessageWithLabel.setMessage(interviewMessage);
-            interviewMessageWithLabel.setLabels(labels);
-            messageList.add(interviewMessageWithLabel);
+            messageList.add(interviewMessage);
         }
         db.close();
         return messageList;

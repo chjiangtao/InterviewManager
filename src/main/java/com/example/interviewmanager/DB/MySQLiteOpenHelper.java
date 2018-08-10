@@ -22,9 +22,11 @@ public class MySQLiteOpenHelper extends SQLiteOpenHelper {
                 "_id integer primary key autoincrement," +
                 "companyName text," +
                 "address text," +
+                "telephone text," +
                 "contact  text," +
                 "office text," +
                 "date text," +
+                "remark text," +
                 "salary text)";
         String sqlLabel="create table if not exists "+Constant.LABEL_TABLE_NAME+"(" +
                 "_id integer primary key autoincrement," +

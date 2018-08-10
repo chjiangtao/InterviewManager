@@ -18,7 +18,10 @@ import android.view.ViewGroup;
 
 import com.example.interviewmanager.R;
 import com.example.interviewmanager.adapter.RecyclerViewAdapter;
+import com.example.interviewmanager.entity.InterviewMessage;
 import com.example.interviewmanager.impl.OnViewClickListener;
+import com.example.interviewmanager.single.InterviewSingle;
+import com.example.interviewmanager.utils.DBUtil;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,25 +30,30 @@ import java.util.List;
  * A simple {@link Fragment} subclass.
  */
 public class MainFragment extends Fragment implements View.OnClickListener{
-
+    private static final String ARGUMENT="message";
     private DrawerLayout dl;
     private RecyclerView recyclerView;
     private List<String> datas=new ArrayList<>();
     private FloatingActionButton floatingActionButton;
     private OnViewClickListener onViewClickListener;
     private RecyclerViewAdapter adapter;
-
-
-    public static MainFragment newInstance() {
-        Bundle args = new Bundle();
+    private InterviewMessage message;
+    private List<InterviewMessage> lists;
+    public static MainFragment newInstance(InterviewMessage message) {
+        Bundle bundle = new Bundle();
+        bundle.putParcelable(ARGUMENT,message);
         MainFragment fragment = new MainFragment();
-        fragment.setArguments(args);
+        fragment.setArguments(bundle);
         return fragment;
     }
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Bundle bundle=getArguments();
+        if(bundle!=null){
+           message=bundle.getParcelable(ARGUMENT);
+        }
         setHasOptionsMenu(true);
         initData();
     }
@@ -65,9 +73,8 @@ public class MainFragment extends Fragment implements View.OnClickListener{
         floatingActionButton.setOnClickListener(this);
         recyclerView=view.findViewById(R.id.main_fragment_rv);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity(),LinearLayoutManager.VERTICAL, false));
-        adapter=new RecyclerViewAdapter(datas);
+        adapter=new RecyclerViewAdapter(lists);
         recyclerView.setAdapter(adapter);
-
         recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
             public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
@@ -85,6 +92,10 @@ public class MainFragment extends Fragment implements View.OnClickListener{
             @Override
             public void onItemClick(View view, int position) {
                  Log.e("test","点击了"+position);
+                InterviewSingle single=InterviewSingle.getIntance();
+                single.setMessages(lists);
+                ShowInterviewFragment.newInstance(position);
+                onViewClickListener.onViewClick(view);
             }
         });
         return view;
@@ -105,9 +116,8 @@ public class MainFragment extends Fragment implements View.OnClickListener{
     }
 
     private void initData(){
-        for(int i=0;i<100;i++){
-            datas.add("数据"+i);
-        }
+        DBUtil dbUtil=new DBUtil(getContext());
+        lists=dbUtil.getAllInterviewMessages();
     }
 
     public void showFABAnimation(View view)

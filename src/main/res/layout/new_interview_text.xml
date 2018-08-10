@@ -1,10 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".fragment.NewInterviewTextFragment"
     android:padding="15dp"
     android:orientation="vertical">
 
@@ -14,11 +12,15 @@
         app:counterEnabled="false"
         android:layout_marginTop="10dp">
         <EditText
-            android:id="@+id/new_interview_text_fragment_companyName"
+            android:id="@+id/new_interview_text_companyName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center_vertical"
+            android:background="@drawable/edit_bg"
+            android:padding="3dp"
             android:inputType="text"
+            android:textSize="16sp"
+            android:textColor="#000000"
             android:hint="请输入公司名称"/>
     </android.support.design.widget.TextInputLayout>
     <android.support.design.widget.TextInputLayout
@@ -27,10 +29,12 @@
         app:counterEnabled="false"
         android:layout_marginTop="15dp">
         <EditText
-            android:id="@+id/new_interview_text_fragment_address"
+            android:id="@+id/new_interview_text_address"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center_vertical"
+            android:background="@drawable/edit_bg"
+            android:padding="3dp"
             android:inputType="text"
             android:hint="请输入公司地址"/>
     </android.support.design.widget.TextInputLayout>
@@ -45,10 +49,12 @@
             app:counterEnabled="false"
             android:layout_marginTop="10dp">
             <EditText
-                android:id="@+id/new_interview_text_fragment_contact"
+                android:id="@+id/new_interview_text_contact"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center_vertical"
+                android:background="@drawable/edit_bg"
+                android:padding="3dp"
                 android:inputType="text"
                 android:hint="请输入联系人姓名"/>
         </android.support.design.widget.TextInputLayout>
@@ -60,10 +66,12 @@
             android:layout_marginTop="10dp"
             android:layout_marginLeft="10dp">
             <EditText
-                android:id="@+id/new_interview_text_fragment_telephone"
+                android:id="@+id/new_interview_text_telephone"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center_vertical"
+                android:background="@drawable/edit_bg"
+                android:padding="3dp"
                 android:inputType="text"
                 android:hint="请输入联系方式"/>
         </android.support.design.widget.TextInputLayout>
@@ -79,10 +87,12 @@
             app:counterEnabled="false"
             android:layout_marginTop="10dp">
             <EditText
-                android:id="@+id/new_interview_text_fragment_office"
+                android:id="@+id/new_interview_text_office"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center_vertical"
+                android:background="@drawable/edit_bg"
+                android:padding="3dp"
                 android:inputType="text"
                 android:hint="请输入面试职位"/>
         </android.support.design.widget.TextInputLayout>
@@ -94,10 +104,12 @@
             android:layout_marginTop="10dp"
             android:layout_marginLeft="10dp">
             <EditText
-                android:id="@+id/new_interview_text_fragment_salary"
+                android:id="@+id/new_interview_text_salary"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center_vertical"
+                android:background="@drawable/edit_bg"
+                android:padding="3dp"
                 android:inputType="text"
                 android:hint="薪资"/>
         </android.support.design.widget.TextInputLayout>
@@ -108,11 +120,13 @@
         app:counterEnabled="false"
         android:layout_marginTop="10dp">
         <EditText
-            android:id="@+id/new_interview_text_fragment_data"
+            android:id="@+id/new_interview_text_date"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center_vertical"
             android:inputType="text"
+            android:background="@drawable/edit_bg"
+            android:padding="3dp"
             android:hint="请输入面试时间"/>
     </android.support.design.widget.TextInputLayout>
     <android.support.design.widget.TextInputLayout
@@ -124,10 +138,12 @@
         android:layout_marginBottom="50dp"
         >
         <EditText
-            android:id="@+id/new_interview_image_fragment_remark"
+            android:id="@+id/new_interview_text_remark"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:inputType="textMultiLine"
+            android:background="@drawable/edit_bg"
+            android:padding="3dp"
             android:maxLines="5"
             android:gravity="left|top"
             android:hint="备注"/>

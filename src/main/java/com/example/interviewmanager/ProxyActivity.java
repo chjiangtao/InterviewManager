@@ -11,17 +11,13 @@ import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 
-import com.example.interviewmanager.entity.EventMessage;
 import com.example.interviewmanager.entity.InterviewMessage;
-import com.example.interviewmanager.fragment.AdFragment;
 import com.example.interviewmanager.fragment.AddNewInterviewFragment;
 import com.example.interviewmanager.fragment.GuidePageFragment;
-import com.example.interviewmanager.fragment.LoginFragment;
 import com.example.interviewmanager.fragment.MainFragment;
-import com.example.interviewmanager.fragment.NewInterviewTextFragment;
+import com.example.interviewmanager.fragment.ShowInterviewFragment;
 import com.example.interviewmanager.impl.OnViewClickListener;
-import com.example.interviewmanager.impl.TransferData;
-import com.example.interviewmanager.utils.DatabaseUtil;
+import com.example.interviewmanager.utils.DBUtil;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
@@ -29,14 +25,13 @@ import org.greenrobot.eventbus.ThreadMode;
 
 
 
-public class ProxyActivity extends FragmentActivity implements  TransferData,OnViewClickListener {
+public class ProxyActivity extends FragmentActivity implements  OnViewClickListener {
 
     private boolean isFrist = true;
     private SharedPreferences sp;
     private FragmentManager manager;
     private FragmentTransaction transaction;
-    private TransferData transferData;
-
+    private InterviewMessage interviewMessage;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -78,17 +73,12 @@ public class ProxyActivity extends FragmentActivity implements  TransferData,OnV
         transaction.commit();
     }
 
-    @Override
-    public InterviewMessage getInputData() {
-        NewInterviewTextFragment newInterviewTextFragment = new NewInterviewTextFragment();
-        return newInterviewTextFragment.getInputData();
-    }
+
 
     @Subscribe(threadMode = ThreadMode.MAIN)
-    public void messageEventBus(EventMessage message) {
-//         if(){
-//
-//         }
+    public void messageEventBus(InterviewMessage message) {
+        startFragment(new MainFragment());
+        interviewMessage=message;
     }
 
     @Override
@@ -96,11 +86,14 @@ public class ProxyActivity extends FragmentActivity implements  TransferData,OnV
         switch (view.getId()){
             case R.id.start_main_fragment:
                 startFragment(new MainFragment());
-                DatabaseUtil util = new DatabaseUtil(ProxyActivity.this);
+                DBUtil util = new DBUtil(ProxyActivity.this);
 //                util.insert(null);
                 break;
             case R.id.main_fragment_fab:
                 startFragment(new AddNewInterviewFragment());
+                break;
+            case R.id.main_fragment_card_view:
+                startFragment(new ShowInterviewFragment());
                 break;
             case R.id.add_new_inter_view_fragment_back:
             case R.id.ad_fragment_count_down_view:

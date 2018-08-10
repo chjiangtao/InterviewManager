@@ -1,11 +1,13 @@
 package com.example.interviewmanager.entity;
 
-import java.util.List;
+import android.annotation.SuppressLint;
+import android.os.Parcel;
+import android.os.Parcelable;
 
 /**
  * 面试信息
  */
-public class InterviewMessage {
+public class InterviewMessage implements Parcelable{
     private int id;
     private String companyName;
     private String address;
@@ -14,13 +16,14 @@ public class InterviewMessage {
     private String office;//职位
     private String date;//时间
     private String salary;//薪资
+    private String remark;//备注
 
     public InterviewMessage() {
     }
-
     public InterviewMessage(int id, String companyName,
                             String address, String telephone,
-                            String contact, String office, String date, String salary) {
+                            String contact, String office,
+                            String date, String salary, String remark) {
         this.id = id;
         this.companyName = companyName;
         this.address = address;
@@ -29,6 +32,20 @@ public class InterviewMessage {
         this.office = office;
         this.date = date;
         this.salary = salary;
+        this.remark = remark;
+    }
+
+    public InterviewMessage(Parcel source) {
+        id=source.readInt();
+        companyName=source.readString();
+        address=source.readString();
+        telephone=source.readString();
+        contact=source.readString();
+        office=source.readString();
+        date=source.readString();
+        salary=source.readString();
+        remark=source.readString();
+
     }
 
     public int getId() {
@@ -95,6 +112,14 @@ public class InterviewMessage {
         this.salary = salary;
     }
 
+    public String getRemark() {
+        return remark;
+    }
+
+    public void setRemark(String remark) {
+        this.remark = remark;
+    }
+
     @Override
     public String toString() {
         return "InterviewMessage{" +
@@ -104,8 +129,40 @@ public class InterviewMessage {
                 ", telephone='" + telephone + '\'' +
                 ", contact='" + contact + '\'' +
                 ", office='" + office + '\'' +
-                ", data='" + date + '\'' +
+                ", date='" + date + '\'' +
                 ", salary='" + salary + '\'' +
+                ", remark='" + remark + '\'' +
                 '}';
     }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+          dest.writeString(companyName);
+          dest.writeString(address);
+          dest.writeString(telephone);
+          dest.writeString(contact);
+          dest.writeString(office);
+          dest.writeString(date);
+          dest.writeString(salary);
+          dest.writeString(remark);
+          dest.writeInt(id);
+    }
+
+    public static final Parcelable.Creator<InterviewMessage> CREATOR=
+            new Parcelable.Creator<InterviewMessage>() {
+                @Override
+                public InterviewMessage createFromParcel(Parcel source) {
+                    return new InterviewMessage(source);
+                }
+
+                @Override
+                public InterviewMessage[] newArray(int size) {
+                    return new InterviewMessage[size];
+                }
+            };
 }

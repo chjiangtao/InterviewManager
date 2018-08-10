@@ -22,7 +22,8 @@ public class ExampleUnitTest {
 
     @Test
     public void getDate(){
+        String temp="2018-8-11 11:50:00";
         DateUtil dateUtil=new DateUtil();
-        CurrentDate date=dateUtil.getCurrentTime();
+        CurrentDate date=dateUtil.countDownTime(temp);
     }
 }

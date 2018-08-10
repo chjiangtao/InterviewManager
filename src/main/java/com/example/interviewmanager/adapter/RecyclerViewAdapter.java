@@ -7,14 +7,15 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.example.interviewmanager.R;
+import com.example.interviewmanager.entity.InterviewMessage;
 
 import java.util.List;
 
 public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapter.ViewHolder> {
-    private List<String> datas;
+    private List<InterviewMessage> messages;
     private OnItemClickListener onItemClickListener;
-    public RecyclerViewAdapter(List<String> datas) {
-        this.datas = datas;
+    public RecyclerViewAdapter(List<InterviewMessage> messages) {
+        this.messages = messages;
     }
 
     @Override
@@ -26,7 +27,12 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
 
     @Override
     public void onBindViewHolder(final ViewHolder holder, int position) {
-       holder.mtext.setText(datas.get(position));
+        InterviewMessage message=messages.get(position);
+       holder.companyName.setText(message.getCompanyName());
+       holder.date.setText(message.getDate());
+       holder.salary.setText(message.getSalary());
+       holder.office.setText(message.getOffice());
+       holder.address.setText(message.getAddress());
        holder.itemView.setOnClickListener(new View.OnClickListener() {
            @Override
            public void onClick(View view) {
@@ -39,14 +45,23 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
 
     @Override
     public int getItemCount() {
-        return datas.size();
+        return messages.size();
     }
 
     class ViewHolder extends RecyclerView.ViewHolder{
-        TextView mtext;
+        TextView companyName;
+        TextView address;
+        TextView office;
+        TextView salary;
+        TextView date;
+
         public ViewHolder(View itemView) {
             super(itemView);
-            mtext=itemView.findViewById(R.id.item_tx);
+            companyName=itemView.findViewById(R.id.main_fragment_company_name);
+            address=itemView.findViewById(R.id.main_fragment_address);
+            office=itemView.findViewById(R.id.main_fragment_office);
+            salary=itemView.findViewById(R.id.main_fragment_salary);
+            date=itemView.findViewById(R.id.main_fragment_date);
         }
     }
 
