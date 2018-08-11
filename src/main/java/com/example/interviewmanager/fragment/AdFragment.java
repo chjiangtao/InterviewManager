@@ -38,6 +38,11 @@ public class AdFragment extends Fragment {
             public void onViewClick(View view) {
                 onViewClickListener.onViewClick(view);
             }
+
+            @Override
+            public void onViewClick(View view, Fragment fragment) {
+
+            }
         });
     }
 

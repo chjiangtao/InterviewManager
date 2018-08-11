@@ -92,12 +92,19 @@ public class ProxyActivity extends FragmentActivity implements  OnViewClickListe
             case R.id.main_fragment_fab:
                 startFragment(new AddNewInterviewFragment());
                 break;
-            case R.id.main_fragment_card_view:
-                startFragment(new ShowInterviewFragment());
-                break;
+
             case R.id.add_new_inter_view_fragment_back:
             case R.id.ad_fragment_count_down_view:
                 startFragment(new MainFragment());
+                break;
+        }
+    }
+
+    @Override
+    public void onViewClick(View view, Fragment fragment) {
+        switch (view.getId()){
+            case R.id.main_fragment_card_view:
+                startFragment(fragment);
                 break;
         }
     }

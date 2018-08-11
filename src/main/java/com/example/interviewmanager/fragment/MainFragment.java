@@ -94,8 +94,8 @@ public class MainFragment extends Fragment implements View.OnClickListener{
                  Log.e("test","点击了"+position);
                 InterviewSingle single=InterviewSingle.getIntance();
                 single.setMessages(lists);
-                ShowInterviewFragment.newInstance(position);
-                onViewClickListener.onViewClick(view);
+                Fragment fragment=ShowInterviewFragment.newInstance(position);
+                onViewClickListener.onViewClick(view,fragment);
             }
         });
         return view;
