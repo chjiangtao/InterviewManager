@@ -5,7 +5,7 @@
         android:color="#ffffff" />
     <!-- 边缘线条颜色 -->
     <stroke
-        android:width="5dp"
+        android:width="2dp"
         android:color="@color/color_blue" />
     <!-- 圆角的幅度 -->
     <corners

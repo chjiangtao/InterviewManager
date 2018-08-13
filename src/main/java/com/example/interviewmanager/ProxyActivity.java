@@ -14,6 +14,7 @@ import android.view.WindowManager;
 import com.example.interviewmanager.entity.InterviewMessage;
 import com.example.interviewmanager.fragment.AddNewInterviewFragment;
 import com.example.interviewmanager.fragment.GuidePageFragment;
+import com.example.interviewmanager.fragment.LoginFragment;
 import com.example.interviewmanager.fragment.MainFragment;
 import com.example.interviewmanager.fragment.ShowInterviewFragment;
 import com.example.interviewmanager.impl.OnViewClickListener;
@@ -53,7 +54,7 @@ public class ProxyActivity extends FragmentActivity implements  OnViewClickListe
 
     private void chooseFragment() {
 //        startFragment(new GuidePageFragment());
-        startFragment(new GuidePageFragment());
+        startFragment(new LoginFragment());
 //        sp=getSharedPreferences("firstStart", Context.MODE_PRIVATE);
 //        SharedPreferences.Editor edit=sp.edit();
 //        isFrist=sp.getBoolean("isFirst",true);
