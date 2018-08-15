@@ -54,7 +54,7 @@ public class ProxyActivity extends FragmentActivity implements  OnViewClickListe
 
     private void chooseFragment() {
 //        startFragment(new GuidePageFragment());
-        startFragment(new LoginFragment());
+        startFragment(new MainFragment());
 //        sp=getSharedPreferences("firstStart", Context.MODE_PRIVATE);
 //        SharedPreferences.Editor edit=sp.edit();
 //        isFrist=sp.getBoolean("isFirst",true);
