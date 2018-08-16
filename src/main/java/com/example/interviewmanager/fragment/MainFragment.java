@@ -20,6 +20,7 @@ import com.example.interviewmanager.R;
 import com.example.interviewmanager.adapter.RecyclerViewAdapter;
 import com.example.interviewmanager.entity.InterviewMessage;
 import com.example.interviewmanager.impl.OnViewClickListener;
+import com.example.interviewmanager.notification.InterviewMessageNotification;
 import com.example.interviewmanager.single.InterviewSingle;
 import com.example.interviewmanager.utils.DBUtil;
 
@@ -108,7 +109,9 @@ public class MainFragment extends Fragment implements View.OnClickListener{
 //                dl.openDrawer(Gravity.START);
 //                break;
             case R.id.main_fragment_fab:
-                onViewClickListener.onViewClick(floatingActionButton);
+//                onViewClickListener.onViewClick(floatingActionButton);
+                InterviewMessageNotification notification=new InterviewMessageNotification(getContext());
+                notification.releaseMessage();
                 break;
             case R.id.main_fragment_head_image:
                 break;
