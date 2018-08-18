@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <group android:id="@+id/main_fragment_menu_set_group">
+        <item
+            android:id="@+id/main_fragment_menu_set"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:icon="@drawable/main_fragment_menu_set"
+            android:title="设置" />
+    </group>
+    <group android:id="@+id/main_fragment_statistics_group">
+        <item
+            android:id="@+id/main_fragment_statistics"
+            android:icon="@drawable/main_fragment_menu_statistics"
+            android:title="统计" />
+    </group>
+    <group android:id="@+id/main_fragment_about_group">
+        <item
+            android:id="@+id/main_fragment_about"
+            android:icon="@drawable/main_fragment_menu_statistics"
+            android:title="关于" />
+    </group>
+    <group android:id="@+id/main_fragment_theme_group">
+        <item
+            android:id="@+id/main_fragment_theme"
+            android:icon="@drawable/main_fragment_menu_theme"
+            android:title="个性换肤" />
+    </group>
+    <group android:id="@+id/main_fragment_contact_group">
+        <item
+            android:id="@+id/main_fragment_contact"
+            android:icon="@drawable/main_fragment_menu_contact"
+            android:title="联系开发者" />
+    </group>
+    <group android:id="@+id/main_fragment_exit_group">
+        <item
+            android:id="@+id/main_fragment_exit"
+            android:icon="@drawable/main_fragment_menu_exit"
+            android:title="退出" />
+    </group>
+</menu>

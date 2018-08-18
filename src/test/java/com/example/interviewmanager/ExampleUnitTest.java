@@ -1,5 +1,10 @@
 package com.example.interviewmanager;
 
+
+
+import com.example.interviewmanager.entity.CurrentDate;
+import com.example.interviewmanager.utils.DateUtil;
+
 import org.junit.Test;
 
 import static org.junit.Assert.*;
@@ -13,5 +18,11 @@ public class ExampleUnitTest {
     @Test
     public void addition_isCorrect() {
         assertEquals(4, 2 + 2);
+    }
+    @Test
+    public void getDate(){
+        String temp="2018-8-11 11:50:00";
+        DateUtil dateUtil=new DateUtil();
+        CurrentDate date=dateUtil.countDownTime(temp);
     }
 }
