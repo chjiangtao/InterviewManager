@@ -109,9 +109,9 @@ public class MainFragment extends Fragment implements View.OnClickListener{
 //                dl.openDrawer(Gravity.START);
 //                break;
             case R.id.main_fragment_fab:
-//                onViewClickListener.onViewClick(floatingActionButton);
-                InterviewMessageNotification notification=new InterviewMessageNotification(getContext());
-                notification.releaseMessage();
+                 onViewClickListener.onViewClick(floatingActionButton);
+//                InterviewMessageNotification notification=new InterviewMessageNotification(getContext());
+//                notification.releaseMessage();
                 break;
             case R.id.main_fragment_head_image:
                 break;

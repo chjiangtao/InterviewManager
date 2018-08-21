@@ -14,6 +14,7 @@ import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.TextView;
@@ -274,6 +275,14 @@ public class AddNewInterviewFragment extends Fragment implements View.OnClickLis
                 interviewMessage.setContact(contact);
                 interviewMessage.setRemark(remark);
                 boolean success=dbUtil.insert(interviewMessage);
+                //关闭软键盘
+                InputMethodManager imm = (InputMethodManager) getContext().getSystemService(getContext().INPUT_METHOD_SERVICE);
+                 if(imm.isActive()&&getActivity().getCurrentFocus()!=null){
+                     if(getActivity().getCurrentFocus().getWindowToken()!=null){
+                         imm.hideSoftInputFromWindow(getActivity().getCurrentFocus().getWindowToken(),
+                                 InputMethodManager.HIDE_NOT_ALWAYS);
+                     }
+                 }
                 if (success){
                     Toast.makeText(getContext(), "新增计划成功！", Toast.LENGTH_SHORT).show();
                     EventBus.getDefault().post(interviewMessage);
