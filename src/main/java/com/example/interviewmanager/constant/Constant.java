@@ -11,4 +11,10 @@ public class Constant {
     public static final String LOGIN_URL="";
 
     public static final String UPDATE_URL="";//更新APK的路径
+    public static final String DOWNLOAD_APK_URL="";//下载APK的路径
+
+    public static final String DOWNLOAD_FILE_NAME="interview";//APK文件名
+
+
+
 }

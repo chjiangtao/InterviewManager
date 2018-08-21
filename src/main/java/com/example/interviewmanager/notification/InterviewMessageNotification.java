@@ -28,7 +28,7 @@ public class InterviewMessageNotification {
                 .setSmallIcon(R.mipmap.ic_launcher)
                 .setWhen(System.currentTimeMillis())
                 .setTicker("这是测试内容")
-                .setDefaults(Notification.DEFAULT_SOUND);
+                .setDefaults(Notification.DEFAULT_VIBRATE);
         manager.notify(10,mBuilder.build());
     }
 }

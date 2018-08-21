@@ -30,4 +30,9 @@
     <string name="login_fragment_login_btn">登录</string>
     <string name="login_fragment_forget_password">忘记密码？</string>
 
+
+
+    <string name="update_dialog_title">检测到新版本</string>
+    <string name="update_dialog_download">下载</string>
+    <string name="update_dialog_undownload">下次再说</string>
 </resources>
