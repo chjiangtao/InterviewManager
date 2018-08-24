@@ -37,10 +37,11 @@ public class UpdateAPKUtil {
     /**
      * 获取当前的系统版本
      */
-    private void getVersionCode(){
+    public void getVersionCode(){
         try {
             versionCode=mContext.getPackageManager().
                     getPackageInfo(mContext.getPackageName(),0).versionCode;
+            LogUtil.e(versionCode);
         } catch (PackageManager.NameNotFoundException e) {
             e.printStackTrace();
         }

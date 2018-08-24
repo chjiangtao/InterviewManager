@@ -23,6 +23,7 @@ import com.example.interviewmanager.impl.OnViewClickListener;
 import com.example.interviewmanager.notification.InterviewMessageNotification;
 import com.example.interviewmanager.single.InterviewSingle;
 import com.example.interviewmanager.utils.DBUtil;
+import com.example.interviewmanager.utils.LogUtil;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -40,6 +41,7 @@ public class MainFragment extends Fragment implements View.OnClickListener{
     private RecyclerViewAdapter adapter;
     private InterviewMessage message;
     private List<InterviewMessage> lists;
+
     public static MainFragment newInstance(InterviewMessage message) {
         Bundle bundle = new Bundle();
         bundle.putParcelable(ARGUMENT,message);
@@ -59,6 +61,12 @@ public class MainFragment extends Fragment implements View.OnClickListener{
         initData();
     }
 
+    private void initData(){
+        DBUtil dbUtil=new DBUtil(getContext());
+        lists=dbUtil.getAllInterviewMessages();
+        LogUtil.e("数据长度  "+lists.size());
+    }
+
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
@@ -68,7 +76,6 @@ public class MainFragment extends Fragment implements View.OnClickListener{
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view=inflater.inflate(R.layout.fragment_main, container, false);
-
         dl=view.findViewById(R.id.drawer_layout);
         floatingActionButton=view.findViewById(R.id.main_fragment_fab);
         floatingActionButton.setOnClickListener(this);
@@ -109,19 +116,16 @@ public class MainFragment extends Fragment implements View.OnClickListener{
 //                dl.openDrawer(Gravity.START);
 //                break;
             case R.id.main_fragment_fab:
-//                onViewClickListener.onViewClick(floatingActionButton);
-                InterviewMessageNotification notification=new InterviewMessageNotification(getContext());
-                notification.releaseMessage();
+                onViewClickListener.onViewClick(floatingActionButton);
+//                InterviewMessageNotification notification=new InterviewMessageNotification(getContext());
+//                notification.releaseMessage();
                 break;
             case R.id.main_fragment_head_image:
                 break;
         }
     }
 
-    private void initData(){
-        DBUtil dbUtil=new DBUtil(getContext());
-        lists=dbUtil.getAllInterviewMessages();
-    }
+
 
     public void showFABAnimation(View view)
     {

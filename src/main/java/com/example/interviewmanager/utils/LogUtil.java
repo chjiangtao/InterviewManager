@@ -15,6 +15,12 @@ public class LogUtil {
         }
     }
 
+    public static void e(int value){
+        if(isShow){
+            Log.e(name,String.valueOf(value));
+        }
+    }
+
     public static void v(String value) {
         if (isShow){
             Log.v(name, value);

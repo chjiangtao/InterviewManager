@@ -18,7 +18,9 @@ import com.example.interviewmanager.fragment.LoginFragment;
 import com.example.interviewmanager.fragment.MainFragment;
 import com.example.interviewmanager.fragment.ShowInterviewFragment;
 import com.example.interviewmanager.impl.OnViewClickListener;
+import com.example.interviewmanager.single.InterviewSingle;
 import com.example.interviewmanager.utils.DBUtil;
+import com.example.interviewmanager.utils.LogUtil;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
@@ -74,12 +76,12 @@ public class ProxyActivity extends FragmentActivity implements  OnViewClickListe
         transaction.commit();
     }
 
-
-
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void messageEventBus(InterviewMessage message) {
-        startFragment(new MainFragment());
-        interviewMessage=message;
+        LogUtil.e("发送消息到这儿了");
+        InterviewSingle interviewSingle=InterviewSingle.getIntance();
+        startFragment(MainFragment.newInstance(message));
+//        interviewMessage=message;
     }
 
     @Override

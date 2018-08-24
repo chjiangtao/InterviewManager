@@ -4,6 +4,7 @@ import android.content.Context;
 import android.util.Log;
 
 import com.example.interviewmanager.constant.Constant;
+import com.example.interviewmanager.impl.OnDownloadListener;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -92,7 +93,7 @@ public class HttpUtil {
     /**
      * 下载新版本的apk
      */
-    public void downloadAPK(){
+    public void downloadAPK(final String fileName, final OnDownloadListener onDownloadListener){
         OkHttpClient client=new OkHttpClient();
         FileUtil fileUtil=new FileUtil(mContext);
         final String dir=fileUtil.getFilePath();
@@ -101,7 +102,7 @@ public class HttpUtil {
             @Override
             public void onFailure(Call call, IOException e) {
                 //下载失败
-
+                onDownloadListener.onDownloadFailed(e);
             }
 
             @Override
@@ -111,6 +112,42 @@ public class HttpUtil {
                 int len=0;
                 FileOutputStream fileOutputStream=null;
                 File file=new File(dir);
+                if(!file.exists()){
+                    file.mkdirs();
+                }
+                File dataFile=new File(file,fileName);
+                try {
+                    is=response.body().byteStream();
+                    long total=response.body().contentLength();
+                    fileOutputStream=new FileOutputStream(dataFile);
+                    long sum=0;
+                    while((len=is.read(buf))!=-1){
+                        fileOutputStream.write(buf,0,len);
+                        sum+=len;
+                        int progress=(int)(sum*1.0f/total*100);
+                        //更新进度条
+                        onDownloadListener.onDownloading(progress);
+                    }
+                    onDownloadListener.onDownloadcomplete(dataFile);
+                }catch (Exception e){
+                    onDownloadListener.onDownloadFailed(e);
+                }finally {
+                    try{
+                        if(is!=null){
+                            is.close();
+                        }
+                    }catch (IOException e){
+
+                    }
+                    try{
+                        if(fileOutputStream!=null){
+                            fileOutputStream.close();
+                        }
+                    }catch (IOException e){
+
+                    }
+                }
+
             }
         });
     }
