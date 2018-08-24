@@ -1,10 +1,14 @@
 package com.example.interviewmanager.utils;
 
+import android.content.Context;
 import android.util.Log;
 
 import com.example.interviewmanager.constant.Constant;
 
+import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
 
 import okhttp3.Call;
 import okhttp3.Callback;
@@ -17,6 +21,11 @@ import okhttp3.Response;
 
 public class HttpUtil {
 
+    private Context mContext;
+
+    public HttpUtil(Context mContext) {
+        this.mContext = mContext;
+    }
 
     /**
      * 验证用户名和密码
@@ -51,5 +60,58 @@ public class HttpUtil {
        return false;
     }
 
+    /**
+     * 获取服务器端的版本
+     * @return
+     */
+    public String getVersionCode(){
+        int version=0;
+        String result=null;
+        OkHttpClient client=new OkHttpClient();
+        RequestBody body=new FormBody.Builder()
+                .add("code", String.valueOf(version))
+                .build();
+        Request request=new Request.Builder()
+                .url(Constant.UPDATE_URL)
+                .post(body)
+                .build();
+        client.newCall(request).enqueue(new Callback() {
+            @Override
+            public void onFailure(Call call, IOException e) {
 
+            }
+
+            @Override
+            public void onResponse(Call call, Response response) throws IOException {
+
+            }
+        });
+        return result;
+    }
+
+    /**
+     * 下载新版本的apk
+     */
+    public void downloadAPK(){
+        OkHttpClient client=new OkHttpClient();
+        FileUtil fileUtil=new FileUtil(mContext);
+        final String dir=fileUtil.getFilePath();
+        Request request=new Request.Builder().url(Constant.DOWNLOAD_APK_URL).build();
+        client.newCall(request).enqueue(new Callback() {
+            @Override
+            public void onFailure(Call call, IOException e) {
+                //下载失败
+
+            }
+
+            @Override
+            public void onResponse(Call call, Response response) throws IOException {
+                InputStream is=null;
+                byte[] buf=new byte[2048];
+                int len=0;
+                FileOutputStream fileOutputStream=null;
+                File file=new File(dir);
+            }
+        });
+    }
 }
