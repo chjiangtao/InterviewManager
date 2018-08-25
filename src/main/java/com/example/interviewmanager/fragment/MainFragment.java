@@ -64,7 +64,6 @@ public class MainFragment extends Fragment implements View.OnClickListener{
     private void initData(){
         DBUtil dbUtil=new DBUtil(getContext());
         lists=dbUtil.getAllInterviewMessages();
-        LogUtil.e("数据长度  "+lists.size());
     }
 
     @Override
@@ -99,7 +98,6 @@ public class MainFragment extends Fragment implements View.OnClickListener{
         adapter.setOnItemClickListener(new RecyclerViewAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(View view, int position) {
-                 Log.e("test","点击了"+position);
                 InterviewSingle single=InterviewSingle.getIntance();
                 single.setMessages(lists);
                 Fragment fragment=ShowInterviewFragment.newInstance(position);

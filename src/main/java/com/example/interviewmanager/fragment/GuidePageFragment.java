@@ -15,6 +15,7 @@ import com.example.interviewmanager.R;
 import com.example.interviewmanager.adapter.ViewPagerAdapter;
 import com.example.interviewmanager.custom.Indicator;
 import com.example.interviewmanager.impl.OnViewClickListener;
+import com.example.interviewmanager.transformer.ZoomOutPageTransformer;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -69,6 +70,12 @@ public class GuidePageFragment extends Fragment {
             }
         });
         ViewPagerAdapter adapter=new ViewPagerAdapter(views);
+        vp.setPageTransformer(true, new ZoomOutPageTransformer() {
+            @Override
+            public void transformPage(View page, float position) {
+                rollingPage(page,position);
+            }
+        });
         vp.setAdapter(adapter);
         startFragment=view.findViewById(R.id.start_main_fragment);
         startFragment.setOnClickListener(new View.OnClickListener() {
@@ -80,6 +87,19 @@ public class GuidePageFragment extends Fragment {
         return view;
     }
 
+    public void rollingPage(View view,float position){
+        if(position>=-1&&position<=1){
+            view.setPivotX(0);
+            if(position<0){
+                view.setTranslationX(-position*view.getWidth());
+                view.setRotationY(90*position);
+                view.setScaleX(1-Math.abs(position));
+            }
+            else{
+                view.setTranslationX(-position*view.getWidth());
+            }
+        }
+    }
     private void initData(){
         views.add(LayoutInflater.from(getActivity()).inflate(R.layout.vp_item_first,null));
         views.add(LayoutInflater.from(getActivity()).inflate(R.layout.vp_item_second,null));

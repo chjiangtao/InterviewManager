@@ -10,17 +10,17 @@ import android.support.v4.app.FragmentTransaction;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.Toast;
 
 import com.example.interviewmanager.entity.InterviewMessage;
 import com.example.interviewmanager.fragment.AddNewInterviewFragment;
 import com.example.interviewmanager.fragment.GuidePageFragment;
-import com.example.interviewmanager.fragment.LoginFragment;
 import com.example.interviewmanager.fragment.MainFragment;
-import com.example.interviewmanager.fragment.ShowInterviewFragment;
 import com.example.interviewmanager.impl.OnViewClickListener;
 import com.example.interviewmanager.single.InterviewSingle;
 import com.example.interviewmanager.utils.DBUtil;
-import com.example.interviewmanager.utils.LogUtil;
+import com.example.interviewmanager.utils.LocationUtil;
+import com.example.interviewmanager.utils.NetworkUtil;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
@@ -43,9 +43,21 @@ public class ProxyActivity extends FragmentActivity implements  OnViewClickListe
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_proxy);
         EventBus.getDefault().register(this);
+        downloadData();
         chooseFragment();
+
     }
 
+    /**
+     * 更新位置、天气等数据
+     */
+    private void downloadData(){
+        if(!NetworkUtil.isNetworkAvailabel(this)){
+            Toast.makeText(this, "当前网络故障，请检查网络！", Toast.LENGTH_SHORT).show();
+        }
+        LocationUtil locationUtil =new LocationUtil(this);
+        locationUtil.getLocation();
+    }
     @Override
     protected void onDestroy() {
         super.onDestroy();
@@ -56,7 +68,7 @@ public class ProxyActivity extends FragmentActivity implements  OnViewClickListe
 
     private void chooseFragment() {
 //        startFragment(new GuidePageFragment());
-        startFragment(new MainFragment());
+        startFragment(new GuidePageFragment());
 //        sp=getSharedPreferences("firstStart", Context.MODE_PRIVATE);
 //        SharedPreferences.Editor edit=sp.edit();
 //        isFrist=sp.getBoolean("isFirst",true);
@@ -78,7 +90,6 @@ public class ProxyActivity extends FragmentActivity implements  OnViewClickListe
 
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void messageEventBus(InterviewMessage message) {
-        LogUtil.e("发送消息到这儿了");
         InterviewSingle interviewSingle=InterviewSingle.getIntance();
         startFragment(MainFragment.newInstance(message));
 //        interviewMessage=message;

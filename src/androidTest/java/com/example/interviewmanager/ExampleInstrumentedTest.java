@@ -5,10 +5,10 @@ import android.support.test.InstrumentationRegistry;
 import android.support.test.runner.AndroidJUnit4;
 
 import com.example.interviewmanager.entity.InterviewMessage;
+import com.example.interviewmanager.entity.Location;
 import com.example.interviewmanager.utils.DBUtil;
-import com.example.interviewmanager.utils.FileUtil;
+import com.example.interviewmanager.utils.LocationUtil;
 import com.example.interviewmanager.utils.LogUtil;
-import com.example.interviewmanager.utils.UpdateAPKUtil;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -46,4 +46,12 @@ public class ExampleInstrumentedTest {
         LogUtil.e("数据的长度 "+lists.size());
     }
 
+    @Test
+    public void getLocation(){
+        getContext();
+//        LocationUtil locationUtil =new LocationUtil(context);
+//        locationUtil.getLocation();
+        DBUtil dbUtil=new DBUtil(context);
+        Location location=dbUtil.getLocation();
+    }
 }

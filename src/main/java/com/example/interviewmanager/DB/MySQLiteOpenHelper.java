@@ -32,8 +32,17 @@ public class MySQLiteOpenHelper extends SQLiteOpenHelper {
                 "_id integer primary key autoincrement," +
                 "companyName text," +
                 "label text)";
+        String sqlLocation="create table if not exists "+Constant.LOCATION_TABLE_NAME+"(" +
+                "_id integer primary key autoincrement," +
+                "address text," +
+                "province text," +
+                "city text," +
+                "district text," +
+                "street text)";
+
          sqLiteDatabase.execSQL(sql);
          sqLiteDatabase.execSQL(sqlLabel);
+         sqLiteDatabase.execSQL(sqlLocation);
 
     }
 
