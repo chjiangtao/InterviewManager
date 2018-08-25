@@ -1,6 +1,6 @@
 package com.example.interviewmanager;
 
-import android.util.Log;
+
 
 import com.example.interviewmanager.entity.CurrentDate;
 import com.example.interviewmanager.utils.DateUtil;
@@ -19,7 +19,6 @@ public class ExampleUnitTest {
     public void addition_isCorrect() {
         assertEquals(4, 2 + 2);
     }
-
     @Test
     public void getDate(){
         String temp="2018-8-11 11:50:00";

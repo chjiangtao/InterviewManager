@@ -4,6 +4,8 @@ package com.example.interviewmanager.fragment;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -21,7 +23,7 @@ import java.util.List;
  */
 public class ShowInterviewFragment extends Fragment {
 
-    private int position=0;
+    private int itemPosition=0;
     private List<InterviewMessage> messageList;
 
     private ViewPager viewPager;
@@ -38,10 +40,29 @@ public class ShowInterviewFragment extends Fragment {
         super.onCreate(savedInstanceState);
         Bundle bundle=getArguments();
         if(bundle!=null){
-            position=bundle.getInt("position",0);
+            itemPosition=bundle.getInt("position",0);
         }
         InterviewSingle interviewSingle=InterviewSingle.getIntance();
         messageList=interviewSingle.getMessages();
+
+    }
+
+    @Override
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        viewPager=getActivity().findViewById(R.id.show_interview_fragment_vp);
+        FragmentManager manager=getFragmentManager();
+        viewPager.setAdapter(new FragmentStatePagerAdapter(manager) {
+            @Override
+            public Fragment getItem(int position) {
+                return ViewPagerItemFragment.newInstance(position);
+            }
+
+            @Override
+            public int getCount() {
+                return messageList.size();
+            }
+        });
     }
 
     @Override
@@ -49,7 +70,6 @@ public class ShowInterviewFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view=inflater.inflate(R.layout.fragment_show_interview, container, false);
-        viewPager=view.findViewById(R.id.show_interview_fragment_vp);
         return view;
     }
 
