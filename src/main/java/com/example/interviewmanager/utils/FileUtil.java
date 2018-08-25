@@ -7,7 +7,7 @@ import android.content.Context;
  */
 public class FileUtil {
     private Context mContext;
-
+    private String path;
     public FileUtil(Context mContext) {
         this.mContext = mContext;
     }
@@ -17,7 +17,10 @@ public class FileUtil {
      * @return
      */
     public String getFilePath(){
-        String path=mContext.getFilesDir().getPath();
+        path=mContext.getFilesDir().getPath();
         return path;
     }
+
+
+    public
 }
