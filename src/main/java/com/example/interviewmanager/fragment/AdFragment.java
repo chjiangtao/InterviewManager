@@ -1,58 +1,68 @@
 package com.example.interviewmanager.fragment;
 
 
-import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
-import android.view.LayoutInflater;
+import android.view.KeyEvent;
 import android.view.View;
-import android.view.ViewGroup;
 
 import com.example.interviewmanager.R;
+import com.example.interviewmanager.base.BaseFragment;
 import com.example.interviewmanager.custom.ADCountDownView;
-import com.example.interviewmanager.impl.OnViewClickListener;
+
+import org.greenrobot.eventbus.EventBus;
 
 /**
  * 广告页
  */
-public class AdFragment extends Fragment {
+public class AdFragment extends BaseFragment {
 
     private ADCountDownView adCountDownView;
-    private OnViewClickListener onViewClickListener;
+
+    private int containerId;
+
+    public static AdFragment newInstance(int containerId){
+        Bundle bundle=new Bundle();
+        bundle.putInt("containerId",containerId);
+        AdFragment adFragment=new AdFragment();
+        adFragment.setArguments(bundle);
+        return adFragment;
+    }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        View view=inflater.inflate(R.layout.fragment_ad, container, false);
-        return view;
+    protected boolean onKeyDown(KeyEvent event) {
+        return false;
+    }
+
+    @Override
+    protected int getLayoutId() {
+        return R.layout.fragment_ad;
+    }
+
+    @Override
+    protected void initData(Bundle bundle) {
+
+    }
+
+    @Override
+    protected void initView() {
+
+    }
+
+    @Override
+    protected int getFragmentContainerId() {
+        return 0;
     }
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         adCountDownView=getActivity().findViewById(R.id.ad_fragment_count_down_view);
-        adCountDownView.setOnViewClickListener(new OnViewClickListener() {
+        adCountDownView.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onViewClick(View view) {
-                onViewClickListener.onViewClick(view);
-            }
-
-            @Override
-            public void onViewClick(View view, Fragment fragment) {
-
+            public void onClick(View v) {
+                EventBus.getDefault().post(new String("main"));
             }
         });
-    }
-
-    @Override
-    public void onAttach(Context context) {
-        if(context instanceof OnViewClickListener){
-            onViewClickListener=(OnViewClickListener)context;
-        }else{
-            throw new RuntimeException(context.toString()+" must implement OnButtonLinstener");
-        }
-        super.onAttach(context);
     }
 }

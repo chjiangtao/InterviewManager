@@ -4,31 +4,45 @@ package com.example.interviewmanager.fragment;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
+import android.view.KeyEvent;
 
 import com.example.interviewmanager.R;
+import com.example.interviewmanager.base.BaseFragment;
 import com.example.interviewmanager.utils.ReceiveImageFromCameraUtil;
 
 /**
  * A simple {@link Fragment} subclass.
  */
-public class ChooseHeadImageFragment extends Fragment {
+public class ChooseHeadImageFragment extends BaseFragment {
     private ReceiveImageFromCameraUtil cameraUtil=new ReceiveImageFromCameraUtil(getActivity());
 
     public ChooseHeadImageFragment() {
         // Required empty public constructor
     }
 
+    @Override
+    protected boolean onKeyDown(KeyEvent event) {
+        return false;
+    }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        View view=inflater.inflate(R.layout.fragment_choose_head_image, container, false);
+    protected int getLayoutId() {
+        return R.layout.fragment_choose_head_image;
+    }
 
-        return view;
+    @Override
+    protected void initData(Bundle bundle) {
+
+    }
+
+    @Override
+    protected void initView() {
+
+    }
+
+    @Override
+    protected int getFragmentContainerId() {
+        return 0;
     }
 
     private void getCameraImage(){

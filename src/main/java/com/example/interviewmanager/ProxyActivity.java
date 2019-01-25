@@ -1,40 +1,38 @@
 package com.example.interviewmanager;
 
 
+import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
-import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Toast;
 
-import com.example.interviewmanager.entity.InterviewMessage;
-import com.example.interviewmanager.fragment.AddNewInterviewFragment;
+import com.example.interviewmanager.base.BaseActivity;
+import com.example.interviewmanager.fragment.AdFragment;
 import com.example.interviewmanager.fragment.GuidePageFragment;
-import com.example.interviewmanager.fragment.MainFragment;
-import com.example.interviewmanager.impl.OnViewClickListener;
-import com.example.interviewmanager.single.InterviewSingle;
-import com.example.interviewmanager.utils.DBUtil;
+import com.example.interviewmanager.fragment.LoginFragment;
 import com.example.interviewmanager.utils.LocationUtil;
 import com.example.interviewmanager.utils.NetworkUtil;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
+import org.litepal.LitePal;
 
 
+public class ProxyActivity extends BaseActivity {
 
-public class ProxyActivity extends FragmentActivity implements  OnViewClickListener {
-
+    private int containerId;
     private boolean isFrist = true;
     private SharedPreferences sp;
     private FragmentManager manager;
     private FragmentTransaction transaction;
-    private InterviewMessage interviewMessage;
+    private long mExitTime;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -42,10 +40,11 @@ public class ProxyActivity extends FragmentActivity implements  OnViewClickListe
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_proxy);
+        LitePal.getDatabase();
+        containerId=R.id.fragment_container;
         EventBus.getDefault().register(this);
         downloadData();
         chooseFragment();
-
     }
 
     /**
@@ -67,59 +66,44 @@ public class ProxyActivity extends FragmentActivity implements  OnViewClickListe
     }
 
     private void chooseFragment() {
-//        startFragment(new GuidePageFragment());
-        startFragment(new GuidePageFragment());
-//        sp=getSharedPreferences("firstStart", Context.MODE_PRIVATE);
-//        SharedPreferences.Editor edit=sp.edit();
-//        isFrist=sp.getBoolean("isFirst",true);
-//        if(isFrist){
-//           edit.putBoolean("isFirst",false);
-//           edit.apply();
-//           startFragment(new GuidePageFragment());
-//        }else{
-//            startFragment(new AdFragment());
-//        }
+        sp=getSharedPreferences("firstStart", Context.MODE_PRIVATE);
+        SharedPreferences.Editor edit=sp.edit();
+        isFrist=sp.getBoolean("isFirst",true);
+        if(isFrist){
+           edit.putBoolean("isFirst",false);
+           edit.apply();
+           startFragment(GuidePageFragment.newInstance(containerId));
+        }else{
+            startFragment(AdFragment.newInstance(containerId));
+        }
     }
 
     public void startFragment(Fragment fragment) {
         manager = getSupportFragmentManager();
         transaction = manager.beginTransaction();
-        transaction.replace(R.id.fragment_container, fragment);
+        transaction.replace(R.id.fragment_container, fragment).addToBackStack(null);
         transaction.commit();
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN)
-    public void messageEventBus(InterviewMessage message) {
-        InterviewSingle interviewSingle=InterviewSingle.getIntance();
-        startFragment(MainFragment.newInstance(message));
-//        interviewMessage=message;
+    public void startFragment(String message) {
+            startFragment(LoginFragment.newInstance(containerId));
     }
 
     @Override
-    public void onViewClick(View view) {
-        switch (view.getId()){
-            case R.id.start_main_fragment:
-                startFragment(new MainFragment());
-                DBUtil util = new DBUtil(ProxyActivity.this);
-//                util.insert(null);
-                break;
-            case R.id.main_fragment_fab:
-                startFragment(new AddNewInterviewFragment());
-                break;
-
-            case R.id.add_new_inter_view_fragment_back:
-            case R.id.ad_fragment_count_down_view:
-                startFragment(new MainFragment());
-                break;
+    public void onBackPressed() {
+        super.onBackPressed();
+        if((System.currentTimeMillis()-mExitTime)>3000){
+            Toast.makeText(this, "再按一次退出面试管家", Toast.LENGTH_SHORT).show();
+            mExitTime=System.currentTimeMillis();
+        }else{
+            finish();
+            System.exit(0);
         }
     }
 
     @Override
-    public void onViewClick(View view, Fragment fragment) {
-        switch (view.getId()){
-            case R.id.main_fragment_card_view:
-                startFragment(fragment);
-                break;
-        }
+    protected int getLayoutId() {
+        return R.id.fragment_container;
     }
 }

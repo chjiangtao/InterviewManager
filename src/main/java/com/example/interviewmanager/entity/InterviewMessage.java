@@ -1,13 +1,16 @@
 package com.example.interviewmanager.entity;
 
-import android.annotation.SuppressLint;
 import android.os.Parcel;
 import android.os.Parcelable;
+
+import org.litepal.crud.LitePalSupport;
+
+import java.util.List;
 
 /**
  * 面试信息
  */
-public class InterviewMessage implements Parcelable{
+public class InterviewMessage extends LitePalSupport {
     private int id;
     private String companyName;
     private String address;
@@ -17,35 +20,14 @@ public class InterviewMessage implements Parcelable{
     private String date;//时间
     private String salary;//薪资
     private String remark;//备注
+    private List<Label> labels;
 
-    public InterviewMessage() {
-    }
-    public InterviewMessage(int id, String companyName,
-                            String address, String telephone,
-                            String contact, String office,
-                            String date, String salary, String remark) {
-        this.id = id;
-        this.companyName = companyName;
-        this.address = address;
-        this.telephone = telephone;
-        this.contact = contact;
-        this.office = office;
-        this.date = date;
-        this.salary = salary;
-        this.remark = remark;
+    public List<Label> getLabels() {
+        return labels;
     }
 
-    public InterviewMessage(Parcel source) {
-        id=source.readInt();
-        companyName=source.readString();
-        address=source.readString();
-        telephone=source.readString();
-        contact=source.readString();
-        office=source.readString();
-        date=source.readString();
-        salary=source.readString();
-        remark=source.readString();
-
+    public void setLabels(List<Label> labels) {
+        this.labels = labels;
     }
 
     public int getId() {
@@ -120,49 +102,4 @@ public class InterviewMessage implements Parcelable{
         this.remark = remark;
     }
 
-    @Override
-    public String toString() {
-        return "InterviewMessage{" +
-                "id=" + id +
-                ", companyName='" + companyName + '\'' +
-                ", address='" + address + '\'' +
-                ", telephone='" + telephone + '\'' +
-                ", contact='" + contact + '\'' +
-                ", office='" + office + '\'' +
-                ", date='" + date + '\'' +
-                ", salary='" + salary + '\'' +
-                ", remark='" + remark + '\'' +
-                '}';
-    }
-
-    @Override
-    public int describeContents() {
-        return 0;
-    }
-
-    @Override
-    public void writeToParcel(Parcel dest, int flags) {
-          dest.writeString(companyName);
-          dest.writeString(address);
-          dest.writeString(telephone);
-          dest.writeString(contact);
-          dest.writeString(office);
-          dest.writeString(date);
-          dest.writeString(salary);
-          dest.writeString(remark);
-          dest.writeInt(id);
-    }
-
-    public static final Parcelable.Creator<InterviewMessage> CREATOR=
-            new Parcelable.Creator<InterviewMessage>() {
-                @Override
-                public InterviewMessage createFromParcel(Parcel source) {
-                    return new InterviewMessage(source);
-                }
-
-                @Override
-                public InterviewMessage[] newArray(int size) {
-                    return new InterviewMessage[size];
-                }
-            };
 }

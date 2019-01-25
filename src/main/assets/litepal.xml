@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<litepal>
+    <dbname value="manager" ></dbname>
+
+    <version value="1" ></version>
+    <list>
+        <mapping class="com.example.interviewmanager.entity.InterviewMessage"></mapping>
+        <mapping class="com.example.interviewmanager.entity.UpdateMessage"></mapping>
+        <mapping class="com.example.interviewmanager.entity.Label"></mapping>
+    </list>
+</litepal>

@@ -11,6 +11,7 @@ import android.support.v7.widget.Toolbar;
 import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,8 +22,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.interviewmanager.R;
+import com.example.interviewmanager.base.BaseFragment;
 import com.example.interviewmanager.entity.InterviewMessage;
-import com.example.interviewmanager.utils.DBUtil;
 
 import org.greenrobot.eventbus.EventBus;
 
@@ -30,12 +31,10 @@ import org.greenrobot.eventbus.EventBus;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class AddNewInterviewFragment extends Fragment implements View.OnClickListener {
+public class AddNewInterviewFragment extends BaseFragment implements View.OnClickListener {
     private FragmentTransaction transaction;
 
-    private View view;
-    private Toolbar tb;
-    private TextView choosewordOrmage;
+    private TextView choosewordOrimage;
     private TextView submit;
     private TextView save;
     private boolean isShowImageFragment = false;
@@ -59,13 +58,26 @@ public class AddNewInterviewFragment extends Fragment implements View.OnClickLis
     private String date;
     private String remark;
 
+
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        view = inflater.inflate(R.layout.fragment_add_new_inter_view, container, false);
+    protected boolean onKeyDown(KeyEvent event) {
+        return false;
+    }
+
+    @Override
+    protected int getLayoutId() {
+        return R.layout.fragment_add_new_inter_view;
+    }
+
+    @Override
+    protected void initData(Bundle bundle) {
+
+    }
+
+    @Override
+    protected void initView() {
         changeView(1);
-        companyNameET=view.findViewById(R.id.new_interview_text_companyName);
+        companyNameET=mRootView.findViewById(R.id.new_interview_text_companyName);
         companyNameET.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -82,7 +94,7 @@ public class AddNewInterviewFragment extends Fragment implements View.OnClickLis
                 companyName=s.toString();
             }
         });
-        addressET=view.findViewById(R.id.new_interview_text_address);
+        addressET=mRootView.findViewById(R.id.new_interview_text_address);
         addressET.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -99,7 +111,7 @@ public class AddNewInterviewFragment extends Fragment implements View.OnClickLis
                 address=s.toString();
             }
         });
-        contactET=view.findViewById(R.id.new_interview_text_contact);
+        contactET=mRootView.findViewById(R.id.new_interview_text_contact);
         contactET.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -116,7 +128,7 @@ public class AddNewInterviewFragment extends Fragment implements View.OnClickLis
                 contact=s.toString();
             }
         });
-        telephoneET=view.findViewById(R.id.new_interview_text_telephone);
+        telephoneET=mRootView.findViewById(R.id.new_interview_text_telephone);
         telephoneET.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -133,7 +145,7 @@ public class AddNewInterviewFragment extends Fragment implements View.OnClickLis
                 telephone=s.toString();
             }
         });
-        officeET=view.findViewById(R.id.new_interview_text_office);
+        officeET=mRootView.findViewById(R.id.new_interview_text_office);
         officeET.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -147,10 +159,10 @@ public class AddNewInterviewFragment extends Fragment implements View.OnClickLis
 
             @Override
             public void afterTextChanged(Editable s) {
-                  office=s.toString();
+                office=s.toString();
             }
         });
-        salaryET=view.findViewById(R.id.new_interview_text_salary);
+        salaryET=mRootView.findViewById(R.id.new_interview_text_salary);
         salaryET.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -167,7 +179,7 @@ public class AddNewInterviewFragment extends Fragment implements View.OnClickLis
                 salary=s.toString();
             }
         });
-        dateET=view.findViewById(R.id.new_interview_text_date);
+        dateET=mRootView.findViewById(R.id.new_interview_text_date);
         dateET.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -181,10 +193,10 @@ public class AddNewInterviewFragment extends Fragment implements View.OnClickLis
 
             @Override
             public void afterTextChanged(Editable s) {
-                 date=s.toString();
+                date=s.toString();
             }
         });
-        remarkET=view.findViewById(R.id.new_interview_text_remark);
+        remarkET=mRootView.findViewById(R.id.new_interview_text_remark);
         remarkET.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -201,7 +213,19 @@ public class AddNewInterviewFragment extends Fragment implements View.OnClickLis
                 remark=s.toString();
             }
         });
-        return view;
+        choosewordOrimage = mRootView.findViewById(R.id.add_new_interview_fragment_word_tv);
+        choosewordOrimage.setOnClickListener(this);
+        submit = mRootView.findViewById(R.id.add_new_interview_fragment_submit);
+        submit.setOnClickListener(this);
+        save = mRootView.findViewById(R.id.add_new_interview_fragment_save);
+        save.setOnClickListener(this);
+        back=mRootView.findViewById(R.id.add_new_inter_view_fragment_back);
+        back.setOnClickListener(this);
+    }
+
+    @Override
+    protected int getFragmentContainerId() {
+        return 0;
     }
 
     /**
@@ -209,7 +233,7 @@ public class AddNewInterviewFragment extends Fragment implements View.OnClickLis
      * @param type
      */
     private void changeView(int type){
-        FrameLayout frameLayout=view.findViewById(R.id.add_new_interview_fragment_container);
+        FrameLayout frameLayout=mRootView.findViewById(R.id.add_new_interview_fragment_container);
         int id = 0;
         switch (type){
             case 1:
@@ -232,14 +256,7 @@ public class AddNewInterviewFragment extends Fragment implements View.OnClickLis
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        choosewordOrmage = getActivity().findViewById(R.id.add_new_interview_fragment_word_tv);
-        choosewordOrmage.setOnClickListener(this);
-        submit = getActivity().findViewById(R.id.add_new_interview_fragment_submit);
-        submit.setOnClickListener(this);
-        save = getActivity().findViewById(R.id.add_new_interview_fragment_save);
-        save.setOnClickListener(this);
-        back=getActivity().findViewById(R.id.add_new_inter_view_fragment_back);
-        back.setOnClickListener(this);
+
 
     }
 
@@ -248,12 +265,12 @@ public class AddNewInterviewFragment extends Fragment implements View.OnClickLis
         switch (view.getId()) {
             case R.id.add_new_interview_fragment_word_tv:
                 if (isShowImageFragment) {
-                    choosewordOrmage.setBackgroundResource(R.drawable.add_new_interview_fragment_word);
+                    choosewordOrimage.setBackgroundResource(R.drawable.add_new_interview_fragment_word);
                     save.setVisibility(View.GONE);
                     submit.setVisibility(View.VISIBLE);
                     isShowImageFragment = false;
                 } else {
-                    choosewordOrmage.setBackgroundResource(R.drawable.add_new_interview_fragment_camera);
+                    choosewordOrimage.setBackgroundResource(R.drawable.add_new_interview_fragment_camera);
                     submit.setVisibility(View.GONE);
                     save.setVisibility(View.VISIBLE);
                     isShowImageFragment = true;
@@ -265,7 +282,6 @@ public class AddNewInterviewFragment extends Fragment implements View.OnClickLis
                     break;
                 }
                 InterviewMessage interviewMessage=new InterviewMessage();
-                DBUtil dbUtil=new DBUtil(getContext());
                 interviewMessage.setCompanyName(companyName);
                 interviewMessage.setAddress(address);
                 interviewMessage.setDate(date);
@@ -274,7 +290,7 @@ public class AddNewInterviewFragment extends Fragment implements View.OnClickLis
                 interviewMessage.setTelephone(telephone);
                 interviewMessage.setContact(contact);
                 interviewMessage.setRemark(remark);
-                boolean success=dbUtil.insert(interviewMessage);
+                boolean success=interviewMessage.save();
                 //关闭软键盘
                 InputMethodManager imm = (InputMethodManager) getContext().getSystemService(getContext().INPUT_METHOD_SERVICE);
                  if(imm.isActive()&&getActivity().getCurrentFocus()!=null){

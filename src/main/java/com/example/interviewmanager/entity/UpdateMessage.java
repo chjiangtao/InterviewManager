@@ -1,16 +1,15 @@
 package com.example.interviewmanager.entity;
 
+import org.litepal.crud.LitePalSupport;
+
 /**
  * 更新
  */
-public class UpdateMessage {
-    private int versionCode;
-    private String message;
+public class UpdateMessage extends LitePalSupport {
 
-    public UpdateMessage(int versionCode, String message) {
-        this.versionCode = versionCode;
-        this.message = message;
-    }
+    private int versionCode;
+
+    private String message;
 
     public int getVersionCode() {
         return versionCode;

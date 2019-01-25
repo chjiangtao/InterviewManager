@@ -36,6 +36,6 @@
         <item
             android:id="@+id/main_fragment_exit"
             android:icon="@drawable/main_fragment_menu_exit"
-            android:title="退出" />
+            android:title="注销登录" />
     </group>
 </menu>

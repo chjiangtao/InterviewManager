@@ -8,12 +8,12 @@ import com.example.interviewmanager.R;
 import com.example.interviewmanager.base.BaseFragment;
 
 /**
- * 注册
+ * 设置
  */
-public class RegisterFragment extends BaseFragment {
+public class SetFragment extends BaseFragment {
 
 
-    public RegisterFragment() {
+    public SetFragment() {
         // Required empty public constructor
     }
 
@@ -24,7 +24,7 @@ public class RegisterFragment extends BaseFragment {
 
     @Override
     protected int getLayoutId() {
-        return R.layout.fragment_register;
+        return R.layout.fragment_set;
     }
 
     @Override

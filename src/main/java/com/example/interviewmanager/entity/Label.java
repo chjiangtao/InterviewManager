@@ -1,23 +1,35 @@
 package com.example.interviewmanager.entity;
 
+import org.litepal.crud.LitePalSupport;
+
 import java.util.List;
 
 /**
  * 公司标签
  * 只显示4个
  */
-public class Label {
+public class Label extends LitePalSupport {
+
     private int id;
     private String companyName;
     private String label;
     private int weight;//每个标签的权重
-    public Label() {
+    private InterviewMessage interviewMessage;
+
+    public int getWeight() {
+        return weight;
     }
 
-    public Label(int id, String companyName, String label) {
-        this.id = id;
-        this.companyName = companyName;
-        this.label = label;
+    public void setWeight(int weight) {
+        this.weight = weight;
+    }
+
+    public InterviewMessage getInterviewMessage() {
+        return interviewMessage;
+    }
+
+    public void setInterviewMessage(InterviewMessage interviewMessage) {
+        this.interviewMessage = interviewMessage;
     }
 
     public int getId() {
@@ -44,12 +56,4 @@ public class Label {
         this.label = label;
     }
 
-    @Override
-    public String toString() {
-        return "Label{" +
-                "id=" + id +
-                ", companyName='" + companyName + '\'' +
-                ", label='" + label + '\'' +
-                '}';
-    }
 }

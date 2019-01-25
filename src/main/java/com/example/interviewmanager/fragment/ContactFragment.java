@@ -2,18 +2,22 @@ package com.example.interviewmanager.fragment;
 
 
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
 import android.view.KeyEvent;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 
 import com.example.interviewmanager.R;
 import com.example.interviewmanager.base.BaseFragment;
 
 /**
- * 注册
+ * 联系开发者
  */
-public class RegisterFragment extends BaseFragment {
+public class ContactFragment extends BaseFragment {
 
 
-    public RegisterFragment() {
+    public ContactFragment() {
         // Required empty public constructor
     }
 
@@ -24,7 +28,7 @@ public class RegisterFragment extends BaseFragment {
 
     @Override
     protected int getLayoutId() {
-        return R.layout.fragment_register;
+        return R.layout.fragment_contact;
     }
 
     @Override

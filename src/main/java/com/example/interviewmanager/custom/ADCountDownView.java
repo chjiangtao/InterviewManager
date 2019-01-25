@@ -12,7 +12,7 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.animation.LinearInterpolator;
 
-import com.example.interviewmanager.impl.OnViewClickListener;
+import org.greenrobot.eventbus.EventBus;
 
 /**
  * 广告页的倒计时
@@ -21,7 +21,6 @@ public class ADCountDownView extends View{
     private String prompt="关闭|";
     private int minNumber=0;
     private Paint mPaint;
-    private OnViewClickListener onViewClickListener;
 
     public ADCountDownView(Context context) {
         this(context,null);
@@ -104,7 +103,7 @@ public class ADCountDownView extends View{
                 postInvalidate();
                 if(minNumber==value){
                     Log.e("test","minNumber "+minNumber+" value "+value);
-                    onViewClickListener.onViewClick(ADCountDownView.this);
+                    EventBus.getDefault().post(new String("main"));
                 }
             }
         });
@@ -115,7 +114,7 @@ public class ADCountDownView extends View{
     public boolean onTouchEvent(MotionEvent event) {
         switch (event.getAction()){
             case MotionEvent.ACTION_DOWN:
-                onViewClickListener.onViewClick(this);
+                EventBus.getDefault().post(new String("main"));
                 break;
         }
         return true;
@@ -127,8 +126,6 @@ public class ADCountDownView extends View{
         startCountDown();
     }
 
-    public void setOnViewClickListener(OnViewClickListener onViewClickListener){
-        this.onViewClickListener=onViewClickListener;
-    }
+
 
 }

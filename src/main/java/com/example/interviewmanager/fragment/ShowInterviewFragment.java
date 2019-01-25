@@ -7,12 +7,10 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.view.ViewPager;
-import android.util.Log;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
+import android.view.KeyEvent;
 
 import com.example.interviewmanager.R;
+import com.example.interviewmanager.base.BaseFragment;
 import com.example.interviewmanager.entity.InterviewMessage;
 import com.example.interviewmanager.single.InterviewSingle;
 
@@ -21,7 +19,7 @@ import java.util.List;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class ShowInterviewFragment extends Fragment {
+public class ShowInterviewFragment extends BaseFragment {
 
     private int itemPosition=0;
     private List<InterviewMessage> messageList;
@@ -63,14 +61,32 @@ public class ShowInterviewFragment extends Fragment {
                 return messageList.size();
             }
         });
+        viewPager.setCurrentItem(itemPosition,false);
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        View view=inflater.inflate(R.layout.fragment_show_interview, container, false);
-        return view;
+    protected boolean onKeyDown(KeyEvent event) {
+        return false;
+    }
+
+    @Override
+    protected int getLayoutId() {
+        return R.layout.fragment_show_interview;
+    }
+
+    @Override
+    protected void initData(Bundle bundle) {
+
+    }
+
+    @Override
+    protected void initView() {
+
+    }
+
+    @Override
+    protected int getFragmentContainerId() {
+        return 0;
     }
 
 }
